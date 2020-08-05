@@ -37,13 +37,12 @@ def get_time() -> str:
     return datetime.now().strftime("%H:%M:%S")
 
 
-def main() -> None:
-    output = f"{get_time()} | t = {get_temp()} 'C | v = {get_volts():.2f} V | clk = {get_clock()} MHz\t| {get_throttled()}"
-    print(output)
+def print_status() -> None:
+    print(f"{get_time()} | t = {get_temp()} 'C | v = {get_volts():.2f} V | clk = {get_clock()} MHz\t| {get_throttled()}")
 
 
 if __name__ == "__main__":
     while True:
-        main()
+        print_status()
         time.sleep(2)
 
