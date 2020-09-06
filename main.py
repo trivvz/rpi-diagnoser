@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import subprocess
 import time
 from datetime import datetime
@@ -37,12 +38,21 @@ def get_time() -> str:
     return datetime.now().strftime("%H:%M:%S")
 
 
+def gen_output() -> str:
+    return f"{get_time()} | t = {get_temp()} 'C | v = {get_volts():.2f} V | clk = {get_clock()} MHz\t| {get_throttled()}"
+
+
+def gen_log(logfile: str) -> None:
+    with open(logfile, "a+") as file:
+        file.write(gen_output() + "\n")
+
+
 def print_status() -> None:
-    print(f"{get_time()} | t = {get_temp()} 'C | v = {get_volts():.2f} V | clk = {get_clock()} MHz\t| {get_throttled()}")
+    print(gen_output())
 
 
 if __name__ == "__main__":
     while True:
         print_status()
+        gen_log("log.txt")
         time.sleep(2)
-
