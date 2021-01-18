@@ -54,5 +54,5 @@ def print_status() -> None:
 if __name__ == "__main__":
     while True:
         print_status()
-        gen_log("log.txt")
+        # gen_log("log.txt")
         time.sleep(2)
