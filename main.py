@@ -106,6 +106,14 @@ class DiagInfo:
         ]
         return " | ".join(output)
 
+    def gen_summary(self) -> str:
+        return (
+            "\n--- Raspberry Pi diagnostic statistics ---"
+            f"\nTemperature min/avg/max = {self.temp_min}/{self.get_temp_avg():.1f}/{self.temp_max}"
+            f"\n    Voltage min/avg/max = {self.voltage_min:.2f}/{self.get_voltage_avg():.2f}/{self.voltage_max:.2f}"
+            f"\n      Clock min/avg/max = {self.clock_min}/{self.get_clock_avg()}/{self.clock_max}"
+        )
+
     def gen_log(self, logfile: str) -> None:
         with open(logfile, "a+") as file:
             file.write(self.gen_output() + "\n")
@@ -116,17 +124,12 @@ class DiagInfo:
 
 
 if __name__ == "__main__":
+    diag_info = DiagInfo()
     try:
-        diag_info = DiagInfo()
         while True:
             diag_info.update()
             str(diag_info)
             # gen_log("log.txt")
             time.sleep(2)
     except KeyboardInterrupt:
-        print(
-            "\n--- Raspberry Pi diagnostic statistics ---"
-            f"\nTemperature min/avg/max = {diag_info.temp_min}/{diag_info.get_temp_avg():.2f}/{diag_info.temp_max}"
-            f"\n    Voltage min/avg/max = {diag_info.voltage_min}/{diag_info.get_voltage_avg():.2f}/{diag_info.voltage_max}"
-            f"\n      Clock min/avg/max = {diag_info.clock_min}/{diag_info.get_clock_avg()}/{diag_info.clock_max}"
-        )
+        print(diag_info.gen_summary())
