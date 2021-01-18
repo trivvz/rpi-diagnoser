@@ -3,11 +3,7 @@ import subprocess
 import time
 from datetime import datetime
 
-
-MEASURE_TEMP = "vcgencmd measure_temp"
-MEASURE_CLOCK = "vcgencmd measure_clock arm"
-MEASURE_VOLTS = "vcgencmd measure_volts"
-GET_THROTTLED = "vcgencmd get_throttled"
+from config import GET_THROTTLED, MEASURE_CLOCK, MEASURE_TEMP, MEASURE_VOLTS
 
 
 def call_cmd(cmd: str) -> str:
@@ -52,7 +48,10 @@ def print_status() -> None:
 
 
 if __name__ == "__main__":
-    while True:
-        print_status()
-        # gen_log("log.txt")
-        time.sleep(2)
+    try:
+        while True:
+            print_status()
+            # gen_log("log.txt")
+            time.sleep(2)
+    except KeyboardInterrupt:
+        print("\n--- Raspberry Pi diagnostic statistics ---")
