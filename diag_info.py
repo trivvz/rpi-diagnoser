@@ -53,7 +53,8 @@ class DiagInfo:
     @staticmethod
     def get_throttled() -> str:
         throttled_val = int(utils.call_cmd(GET_THROTTLED), 0)
-        return bin(throttled_val)
+        throttled_str = f"{throttled_val:#020b}"
+        return f"{throttled_str[2:6]}::{throttled_str[-4:]}"
 
     def get_temp_avg(self) -> Temperature:
         return Temperature(sum(self.temp_list) / len(self.temp_list))
