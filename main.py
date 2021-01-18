@@ -63,7 +63,14 @@ class DiagInfo:
         self.throttled = self.get_throttled()
 
     def gen_output(self) -> str:
-        return f"{utils.format_time(self.time)} | t = {self.temp}{DEGREE_SIGN}C | v = {self.voltage:.2f}V | clk = {self.clock} MHz\t| {self.throttled}"
+        output = [
+            utils.format_time(self.time),
+            f"t = {self.temp}{DEGREE_SIGN}C",
+            f"v = {self.voltage:.2f}V",
+            f"clk = {self.clock} MHz\t",
+            self.throttled,
+        ]
+        return " | ".join(output)
 
     def gen_log(self, logfile: str) -> None:
         with open(logfile, "a+") as file:
