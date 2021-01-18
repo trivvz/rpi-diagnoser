@@ -1,56 +1,90 @@
 #!/usr/bin/python3
-import subprocess
 import time
 from datetime import datetime
+from typing import List
 
-from config import GET_THROTTLED, MEASURE_CLOCK, MEASURE_TEMP, MEASURE_VOLTS
-
-
-def call_cmd(cmd: str) -> str:
-    return subprocess.check_output(cmd, shell=True).decode().split("=")[1].strip()
-
-
-def get_temp() -> float:
-    temp_str = call_cmd(MEASURE_TEMP)
-    return float(temp_str.split("'")[0])
-    
-
-def get_clock() -> int:
-    clock_str = call_cmd(MEASURE_CLOCK)
-    return int(clock_str) // 1_000_000
+import utils
+from config import (
+    DEGREE_SIGN,
+    GET_THROTTLED,
+    MEASURE_CLOCK,
+    MEASURE_TEMP,
+    MEASURE_VOLTS,
+)
+from my_types import Clock, Temperature, Voltage
 
 
-def get_volts() -> float:
-    volts_str = call_cmd(MEASURE_VOLTS)
-    return float(volts_str.split("V")[0])
+class DiagInfo:
+    def __init__(self) -> None:
 
+        self.temp: Temperature = Temperature(0.0)
+        self.min_temp: Temperature = Temperature(0.0)
+        self.max_temp: Temperature = Temperature(0.0)
+        self.temp_list: List[Temperature] = []
 
-def get_throttled() -> bin:
-    throttled_str = call_cmd(GET_THROTTLED)
-    return bin(int(throttled_str, 0))
+        self.voltage: Voltage = Voltage(0.0)
+        self.min_voltage: Voltage = Voltage(0.0)
+        self.max_voltage: Voltage = Voltage(0.0)
+        self.voltage_list: List[Voltage] = []
 
+        self.clock: Clock = Clock(0)
+        self.min_clock: Clock = Clock(0)
+        self.max_clock: Clock = Clock(0)
+        self.clock_list: List[Clock] = []
 
-def get_time() -> str:
-    return datetime.now().strftime("%H:%M:%S")
+        self.throttled: str
 
+        self.time: datetime = datetime.now()
 
-def gen_output() -> str:
-    return f"{get_time()} | t = {get_temp()} 'C | v = {get_volts():.2f} V | clk = {get_clock()} MHz\t| {get_throttled()}"
+    @staticmethod
+    def get_time() -> str:
+        return datetime.now().strftime("%H:%M:%S")
 
+    @staticmethod
+    def get_temp() -> Temperature:
+        temp_val = float(utils.call_cmd(MEASURE_TEMP).split("'")[0])
+        return Temperature(temp_val)
 
-def gen_log(logfile: str) -> None:
-    with open(logfile, "a+") as file:
-        file.write(gen_output() + "\n")
+    @staticmethod
+    def get_voltage() -> Voltage:
+        volts_val = float(utils.call_cmd(MEASURE_VOLTS).split("V")[0])
+        return Voltage(volts_val)
 
+    @staticmethod
+    def get_clock() -> Clock:
+        clock_val = int(utils.call_cmd(MEASURE_CLOCK))
+        return Clock(clock_val // 1_000_000)
 
-def print_status() -> None:
-    print(gen_output())
+    @staticmethod
+    def get_throttled() -> str:
+        throttled_val = int(utils.call_cmd(GET_THROTTLED), 0)
+        return bin(throttled_val)
+
+    def update(self) -> None:
+        self.time = self.get_time()
+        self.temp = self.get_temp()
+        self.voltage = self.get_voltage()
+        self.clock = self.get_clock()
+        self.throttled = self.get_throttled()
+
+    def gen_output(self) -> str:
+        return f"{self.time} | t = {self.temp}{DEGREE_SIGN}C | v = {self.voltage:.2f}V | clk = {self.clock} MHz\t| {self.throttled}"
+
+    def gen_log(self, logfile: str) -> None:
+        with open(logfile, "a+") as file:
+            file.write(self.gen_output() + "\n")
+
+    def __str__(self) -> str:
+        print(self.gen_output())
+        return super().__str__()
 
 
 if __name__ == "__main__":
     try:
         while True:
-            print_status()
+            diag_info = DiagInfo()
+            diag_info.update()
+            str(diag_info)
             # gen_log("log.txt")
             time.sleep(2)
     except KeyboardInterrupt:
