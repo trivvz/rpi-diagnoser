@@ -33,12 +33,7 @@ class DiagInfo:
         self.clock_list: List[Clock] = []
 
         self.throttled: str
-
-        self.time: datetime = datetime.now()
-
-    @staticmethod
-    def get_time() -> str:
-        return datetime.now().strftime("%H:%M:%S")
+        self.time = datetime.now()
 
     @staticmethod
     def get_temp() -> Temperature:
@@ -61,14 +56,14 @@ class DiagInfo:
         return bin(throttled_val)
 
     def update(self) -> None:
-        self.time = self.get_time()
+        self.time = datetime.now()
         self.temp = self.get_temp()
         self.voltage = self.get_voltage()
         self.clock = self.get_clock()
         self.throttled = self.get_throttled()
 
     def gen_output(self) -> str:
-        return f"{self.time} | t = {self.temp}{DEGREE_SIGN}C | v = {self.voltage:.2f}V | clk = {self.clock} MHz\t| {self.throttled}"
+        return f"{utils.format_time(self.time)} | t = {self.temp}{DEGREE_SIGN}C | v = {self.voltage:.2f}V | clk = {self.clock} MHz\t| {self.throttled}"
 
     def gen_log(self, logfile: str) -> None:
         with open(logfile, "a+") as file:
