@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import time
 
-import diag_info
-from config import IS_LOGGING_ENABLED, REFRESH_TIME
+from src import diag_info
+from src.config import IS_LOGGING_ENABLED, REFRESH_TIME
 
 
 if __name__ == "__main__":

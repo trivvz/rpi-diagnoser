@@ -1,15 +1,15 @@
 from datetime import datetime
 from typing import List
 
-import utils
-from constants import (
+from src import utils
+from src.constants import (
     DEGREE_SIGN,
     GET_THROTTLED,
     MEASURE_CLOCK,
     MEASURE_TEMP,
     MEASURE_VOLTS,
 )
-from my_types import Clock, Temperature, Voltage
+from src.my_types import Clock, Temperature, Voltage
 
 
 class DiagInfo:
