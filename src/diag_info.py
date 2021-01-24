@@ -1,8 +1,15 @@
 from datetime import datetime
 
 from src import utils
-from src.constants import DEGREE_SIGN, GET_THROTTLED
-from src.value import Temperature, Voltage, Clock
+from src.constants import (
+    DEGREE_SIGN,
+    GET_THROTTLED,
+    THROTTLED_VAL_0,
+    THROTTLED_VAL_3,
+    THROTTLED_VAL_16,
+    THROTTLED_SEP,
+)
+from src.value import Clock, Temperature, Voltage
 
 
 class DiagInfo:
@@ -19,7 +26,11 @@ class DiagInfo:
     def get_throttled() -> str:
         throttled_val = int(utils.call_cmd(GET_THROTTLED), 0)
         throttled_str = f"{throttled_val:#020b}"
-        return f"{throttled_str[2:6]}::{throttled_str[-4:]}"
+        return (
+            f"{throttled_str[THROTTLED_VAL_0:THROTTLED_VAL_3]}"
+            f"{THROTTLED_SEP}"
+            f"{throttled_str[THROTTLED_VAL_16:]}"
+        )
 
     def update(self) -> None:
         self.time = datetime.now()
@@ -29,6 +40,7 @@ class DiagInfo:
         self.throttled = self.get_throttled()
 
     def gen_output(self) -> str:
+        # TODO: get rid of \t in output
         output = [
             utils.format_time(self.time),
             f"t = {self.temperature.value}{DEGREE_SIGN}C",

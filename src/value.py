@@ -3,8 +3,11 @@ from typing import Callable
 from src import utils
 from src.constants import (
     MEASURE_CLOCK,
+    CLOCK_DIVISOR,
     MEASURE_TEMP,
+    MEASURE_TEMP_SPLIT,
     MEASURE_VOLTS,
+    MEASURE_VOLTS_SPLIT,
 )
 from src.my_types import TypeClock, TypeTemperature, TypeVoltage, AnyValue
 
@@ -40,7 +43,7 @@ class Temperature(Value):
 
     @staticmethod
     def get() -> TypeTemperature:
-        val = float(utils.call_cmd(MEASURE_TEMP).split("'")[0])
+        val = float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
         return TypeTemperature(val)
 
 
@@ -52,7 +55,7 @@ class Voltage(Value):
 
     @staticmethod
     def get() -> TypeVoltage:
-        val = float(utils.call_cmd(MEASURE_VOLTS).split("V")[0])
+        val = float(utils.call_cmd(MEASURE_VOLTS).split(MEASURE_VOLTS_SPLIT)[0])
         return TypeVoltage(val)
 
 
@@ -65,7 +68,7 @@ class Clock(Value):
     @staticmethod
     def get() -> TypeClock:
         val = int(utils.call_cmd(MEASURE_CLOCK))
-        return TypeClock(val // 1_000_000)
+        return TypeClock(val // CLOCK_DIVISOR)
 
     def get_avg(self) -> TypeClock:
         return sum(self.all) // len(self.all)

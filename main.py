@@ -2,7 +2,7 @@
 import time
 
 from src import diag_info
-from src.config import IS_LOGGING_ENABLED, REFRESH_TIME
+from src.config import IS_LOGGING_ENABLED, REFRESH_TIME, LOGFILE
 
 
 if __name__ == "__main__":
@@ -13,7 +13,7 @@ if __name__ == "__main__":
             str(diag)
 
             if IS_LOGGING_ENABLED:
-                diag.gen_log("log.txt")
+                diag.gen_log(LOGFILE)
 
             time.sleep(REFRESH_TIME)
 
