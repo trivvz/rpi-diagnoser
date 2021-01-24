@@ -12,14 +12,17 @@
 
 ## Example output:
 ```
-22:38:25 │ t = 59.7°C │ v = 0.85V │ clk = 1500 MHz       │ 0000::0000
-22:38:27 │ t = 60.4°C │ v = 0.85V │ clk = 1500 MHz       │ 1000::1000
-22:38:29 │ t = 59.2°C │ v = 0.85V │ clk = 1000 MHz       │ 1000::0000
+┌──────────┬────────┬───────┬──────────┬───────────┐
+│   TIME   │  TEMP  │ VOLTS │  CLOCK   │ THROTTLED │
+├──────────┼────────┼───────┼──────────┼───────────┤
+│ 00:23:30 │ 58.0°C │ 1.34V │ 1400 MHz │ 1000:0000 │
+│ 00:23:32 │ 57.5°C │ 1.23V │  700 MHz │ 1000:0000 │
+│ 00:23:34 │ 57.5°C │ 1.20V │  600 MHz │ 1000:0000 │
 ^C
 --- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = 59.2/59.8/60.4
-    Voltage min/avg/max = 0.85/0.85/0.85
-      Clock min/avg/max = 1500/1500/1500
+Temperature min/avg/max = 57.5/57.8/58.0
+    Voltage min/avg/max = 1.20/1.28/1.34
+      Clock min/avg/max = 600/1025/1400
 ```
 
 ## How to read throttled message?

@@ -1,7 +1,10 @@
 from datetime import datetime
 
 from src import utils, value, throttled
-from src.constants import DEGREE_SIGN, VERTICAL_SPLIT, SUMMARY_STR_TEMPLATE
+from src.templates import (
+    SUMMARY_STR_TEMPLATE,
+    OUTPUT_TEMPLATE,
+)
 
 
 class DiagInfo:
@@ -22,14 +25,13 @@ class DiagInfo:
 
     def gen_output(self) -> str:
         clk_align = " " if self.clock.value < 1000 else ""
-        output = [
-            utils.format_time(self.time),
-            f"t = {self.temperature.value}{DEGREE_SIGN}C",
-            f"v = {self.voltage.value:.2f}V",
-            f"clk = {clk_align}{self.clock.value} MHz",
-            self.throttled.get(),
-        ]
-        return f" {VERTICAL_SPLIT} ".join(output)
+        return OUTPUT_TEMPLATE.substitute(
+            time=utils.format_time(self.time),
+            temperature=self.temperature.value,
+            voltage=f"{self.voltage.value:.2f}V",
+            clock=f"{clk_align}{self.clock.value}",
+            throttled=self.throttled.get(),
+        )
 
     def gen_summary(self) -> str:
         return SUMMARY_STR_TEMPLATE.substitute(

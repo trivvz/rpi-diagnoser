@@ -3,10 +3,12 @@ import time
 
 from src import diag_info
 from src.config import IS_LOGGING_ENABLED, REFRESH_TIME, LOGFILE
+from src.templates import HEADER
 
 
 if __name__ == "__main__":
     diag = diag_info.DiagInfo()
+    print(HEADER)
     try:
         while True:
             diag.update()
