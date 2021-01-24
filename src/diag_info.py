@@ -21,12 +21,12 @@ class DiagInfo:
         self.clock.update()
 
     def gen_output(self) -> str:
-        # TODO: get rid of \t in output
+        clk_align = " " if self.clock.value < 1000 else ""
         output = [
             utils.format_time(self.time),
             f"t = {self.temperature.value}{DEGREE_SIGN}C",
             f"v = {self.voltage.value:.2f}V",
-            f"clk = {self.clock.value} MHz\t",
+            f"clk = {clk_align}{self.clock.value} MHz",
             self.throttled.get(),
         ]
         return f" {VERTICAL_SPLIT} ".join(output)
