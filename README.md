@@ -12,9 +12,9 @@
 
 ## Example output:
 ```
-22:38:25 | t = 59.7°C | v = 0.85V | clk = 1500 MHz       | 0000::0000
-22:38:27 | t = 60.4°C | v = 0.85V | clk = 1500 MHz       | 1000::1000
-22:38:29 | t = 59.2°C | v = 0.85V | clk = 1000 MHz       | 1000::0000
+22:38:25 │ t = 59.7°C │ v = 0.85V │ clk = 1500 MHz       │ 0000::0000
+22:38:27 │ t = 60.4°C │ v = 0.85V │ clk = 1500 MHz       │ 1000::1000
+22:38:29 │ t = 59.2°C │ v = 0.85V │ clk = 1000 MHz       │ 1000::0000
 ^C
 --- Raspberry Pi diagnostic statistics ---
 Temperature min/avg/max = 59.2/59.8/60.4
