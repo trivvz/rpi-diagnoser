@@ -1,4 +1,5 @@
 """Script specific constants."""
+from string import Template
 
 # RPi diagnostic commands
 MEASURE_TEMP = "vcgencmd measure_temp"
@@ -18,3 +19,12 @@ THROTTLED_SEP = "::"
 
 DEGREE_SIGN = "\N{DEGREE SIGN}"
 VERTICAL_SPLIT = "\u2502"
+
+SUMMARY_STR_TEMPLATE = Template(
+    """
+--- Raspberry Pi diagnostic statistics ---
+Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}
+    Voltage min/avg/max = ${voltage_min}/${voltage_avg}/${voltage_max}
+      Clock min/avg/max = ${clock_min}/${clock_avg}/${clock_max}
+"""
+)

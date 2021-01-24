@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from src import utils, value, throttled
-from src.constants import DEGREE_SIGN, VERTICAL_SPLIT
+from src.constants import DEGREE_SIGN, VERTICAL_SPLIT, SUMMARY_STR_TEMPLATE
 
 
 class DiagInfo:
@@ -32,11 +32,16 @@ class DiagInfo:
         return f" {VERTICAL_SPLIT} ".join(output)
 
     def gen_summary(self) -> str:
-        return (
-            "\n--- Raspberry Pi diagnostic statistics ---"
-            f"\nTemperature min/avg/max = {self.temperature.min}/{self.temperature.get_avg():.1f}/{self.temperature.max}"
-            f"\n    Voltage min/avg/max = {self.voltage.min:.2f}/{self.voltage.get_avg():.2f}/{self.voltage.max:.2f}"
-            f"\n      Clock min/avg/max = {self.clock.min}/{self.clock.get_avg()}/{self.clock.max}"
+        return SUMMARY_STR_TEMPLATE.substitute(
+            temp_min=self.temperature.min,
+            temp_avg=f"{self.temperature.get_avg():.1f}",
+            temp_max=self.temperature.max,
+            voltage_min=f"{self.voltage.min:.2f}",
+            voltage_avg=f"{self.voltage.get_avg():.2f}",
+            voltage_max=f"{self.voltage.max:.2f}",
+            clock_min=self.clock.min,
+            clock_avg=self.clock.get_avg(),
+            clock_max=self.clock.max,
         )
 
     def gen_log(self, logfile: str) -> None:
