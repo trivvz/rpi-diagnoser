@@ -8,6 +8,7 @@ from src.constants import (
     THROTTLED_VAL_3,
     THROTTLED_VAL_16,
     THROTTLED_SEP,
+    VERTICAL_SPLIT,
 )
 from src.value import Clock, Temperature, Voltage
 
@@ -48,7 +49,7 @@ class DiagInfo:
             f"clk = {self.clock.value} MHz\t",
             self.throttled,
         ]
-        return " | ".join(output)
+        return f" {VERTICAL_SPLIT} ".join(output)
 
     def gen_summary(self) -> str:
         return (

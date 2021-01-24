@@ -17,3 +17,4 @@ THROTTLED_VAL_16 = -4  # beginning of second section
 THROTTLED_SEP = "::"
 
 DEGREE_SIGN = "\N{DEGREE SIGN}"
+VERTICAL_SPLIT = "\u2502"
