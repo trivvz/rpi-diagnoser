@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List
 
 from src import utils
 from src.constants import (
@@ -9,7 +8,7 @@ from src.constants import (
     MEASURE_TEMP,
     MEASURE_VOLTS,
 )
-from src.my_types import Clock, Temperature, Voltage
+from src.my_types import TypeClock, TypeTemperature, TypeVoltage
 
 
 class DiagInfo:
@@ -36,19 +35,19 @@ class DiagInfo:
         self.time = datetime.now()
 
     @staticmethod
-    def get_temp() -> Temperature:
+    def get_temp() -> TypeTemperature:
         temp_val = float(utils.call_cmd(MEASURE_TEMP).split("'")[0])
-        return Temperature(temp_val)
+        return TypeTemperature(temp_val)
 
     @staticmethod
-    def get_voltage() -> Voltage:
+    def get_voltage() -> TypeVoltage:
         volts_val = float(utils.call_cmd(MEASURE_VOLTS).split("V")[0])
-        return Voltage(volts_val)
+        return TypeVoltage(volts_val)
 
     @staticmethod
-    def get_clock() -> Clock:
+    def get_clock() -> TypeClock:
         clock_val = int(utils.call_cmd(MEASURE_CLOCK))
-        return Clock(clock_val // 1_000_000)
+        return TypeClock(clock_val // 1_000_000)
 
     @staticmethod
     def get_throttled() -> str:
@@ -56,14 +55,14 @@ class DiagInfo:
         throttled_str = f"{throttled_val:#020b}"
         return f"{throttled_str[2:6]}::{throttled_str[-4:]}"
 
-    def get_temp_avg(self) -> Temperature:
-        return Temperature(sum(self.temp_list) / len(self.temp_list))
+    def get_temp_avg(self) -> TypeTemperature:
+        return TypeTemperature(sum(self.temp_list) / len(self.temp_list))
 
-    def get_voltage_avg(self) -> Voltage:
-        return Voltage(sum(self.voltage_list) / len(self.voltage_list))
+    def get_voltage_avg(self) -> TypeVoltage:
+        return TypeVoltage(sum(self.voltage_list) / len(self.voltage_list))
 
-    def get_clock_avg(self) -> Clock:
-        return Clock(sum(self.clock_list) // len(self.clock_list))
+    def get_clock_avg(self) -> TypeClock:
+        return TypeClock(sum(self.clock_list) // len(self.clock_list))
 
     def handle_temp(self) -> None:
         if self.temp > self.temp_max:
