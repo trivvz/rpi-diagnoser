@@ -20,17 +20,17 @@ class DiagInfo:
         self.temp = self.get_temp()
         self.temp_min = self.temp
         self.temp_max = self.temp
-        self.temp_list: List[Temperature] = []
+        self.temp_list = [self.temp]
 
         self.voltage = self.get_voltage()
         self.voltage_min = self.voltage
         self.voltage_max = self.voltage
-        self.voltage_list: List[Voltage] = []
+        self.voltage_list = [self.voltage]
 
         self.clock = self.get_clock()
         self.clock_min = self.clock
         self.clock_max = self.clock
-        self.clock_list: List[Clock] = []
+        self.clock_list = [self.clock]
 
         self.throttled = self.get_throttled()
         self.time = datetime.now()
