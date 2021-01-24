@@ -1,44 +1,24 @@
 from datetime import datetime
 
-from src import utils
-from src.constants import (
-    DEGREE_SIGN,
-    GET_THROTTLED,
-    THROTTLED_VAL_0,
-    THROTTLED_VAL_3,
-    THROTTLED_VAL_16,
-    THROTTLED_SEP,
-    VERTICAL_SPLIT,
-)
-from src.value import Clock, Temperature, Voltage
+from src import utils, value, throttled
+from src.constants import DEGREE_SIGN, VERTICAL_SPLIT
 
 
 class DiagInfo:
     """Contains and processes the basic RPi diagnostic info."""
 
     def __init__(self) -> None:
-        self.temperature = Temperature()
-        self.voltage = Voltage()
-        self.clock = Clock()
-        self.throttled = self.get_throttled()
+        self.temperature = value.Temperature()
+        self.voltage = value.Voltage()
+        self.clock = value.Clock()
+        self.throttled = throttled.Throttled()
         self.time = datetime.now()
-
-    @staticmethod
-    def get_throttled() -> str:
-        throttled_val = int(utils.call_cmd(GET_THROTTLED), 0)
-        throttled_str = f"{throttled_val:#020b}"
-        return (
-            f"{throttled_str[THROTTLED_VAL_0:THROTTLED_VAL_3]}"
-            f"{THROTTLED_SEP}"
-            f"{throttled_str[THROTTLED_VAL_16:]}"
-        )
 
     def update(self) -> None:
         self.time = datetime.now()
         self.temperature.update()
         self.voltage.update()
         self.clock.update()
-        self.throttled = self.get_throttled()
 
     def gen_output(self) -> str:
         # TODO: get rid of \t in output
@@ -47,7 +27,7 @@ class DiagInfo:
             f"t = {self.temperature.value}{DEGREE_SIGN}C",
             f"v = {self.voltage.value:.2f}V",
             f"clk = {self.clock.value} MHz\t",
-            self.throttled,
+            self.throttled.get(),
         ]
         return f" {VERTICAL_SPLIT} ".join(output)
 
