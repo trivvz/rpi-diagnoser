@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Dict
 
 from src import utils
 from src.constants import (
@@ -30,6 +30,13 @@ class Value:
             self.min = self.value
         self.all.append(self.value)
 
+    def _get_summary(self) -> Dict[str, AnyValue]:
+        return {
+            "min": self.min,
+            "avg": self.get_avg(),
+            "max": self.max,
+        }
+
     def get_avg(self) -> AnyValue:
         return sum(self.all) / len(self.all)
 
@@ -39,12 +46,17 @@ class Temperature(Value):
 
     def __init__(self) -> None:
         super().__init__(self.get)
-        # self.get()
 
     @staticmethod
     def get() -> TypeTemperature:
         val = float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
         return TypeTemperature(val)
+
+    def get_summary(self) -> Dict[str, str]:
+        summary_dict = {}
+        for key, val in self._get_summary().items():
+            summary_dict[f"temp_{key}"] = f"{val:.1f}"
+        return summary_dict
 
 
 class Voltage(Value):
@@ -57,6 +69,12 @@ class Voltage(Value):
     def get() -> TypeVoltage:
         val = float(utils.call_cmd(MEASURE_VOLTS).split(MEASURE_VOLTS_SPLIT)[0])
         return TypeVoltage(val)
+
+    def get_summary(self) -> Dict[str, str]:
+        summary_dict = {}
+        for key, val in self._get_summary().items():
+            summary_dict[f"voltage_{key}"] = f"{val:.2f}"
+        return summary_dict
 
 
 class Clock(Value):
@@ -72,3 +90,9 @@ class Clock(Value):
 
     def get_avg(self) -> TypeClock:
         return sum(self.all) // len(self.all)
+
+    def get_summary(self) -> Dict[str, str]:
+        summary_dict = {}
+        for key, val in self._get_summary().items():
+            summary_dict[f"clock_{key}"] = str(val)
+        return summary_dict

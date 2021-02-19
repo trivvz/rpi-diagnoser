@@ -26,17 +26,14 @@ class DiagInfo:
         self.clock.update()
 
     def gen_summary(self) -> str:
-        return SUMMARY_STR_TEMPLATE.substitute(
-            temp_min=self.temperature.min,
-            temp_avg=f"{self.temperature.get_avg():.1f}",
-            temp_max=self.temperature.max,
-            voltage_min=f"{self.voltage.min:.2f}",
-            voltage_avg=f"{self.voltage.get_avg():.2f}",
-            voltage_max=f"{self.voltage.max:.2f}",
-            clock_min=self.clock.min,
-            clock_avg=self.clock.get_avg(),
-            clock_max=self.clock.max,
-        )
+        return SUMMARY_STR_TEMPLATE.substitute(self._get_summary_dict())
+
+    def _get_summary_dict(self) -> Dict[str, str]:
+        return {
+            **self.temperature.get_summary(),
+            **self.voltage.get_summary(),
+            **self.clock.get_summary(),
+        }
 
     def gen_output(self) -> str:
         return OUTPUT_TEMPLATE.substitute(self._get_output_dict())
