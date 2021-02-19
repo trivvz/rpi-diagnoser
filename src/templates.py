@@ -38,7 +38,7 @@ HEADER = (
 
 OUTPUT_TEMPLATE = Template(
     f"""
-{VER_FRAME} $time {VER_FRAME} $temperature{DEGREE_SIGN}C {VER_FRAME} $voltage {VER_FRAME} $clock MHz {VER_FRAME} $throttled {VER_FRAME}
+{VER_FRAME} $time {VER_FRAME} $temperature {VER_FRAME} $voltage {VER_FRAME} $clock {VER_FRAME} $throttled {VER_FRAME}
 """[
         1:-1
     ]
