@@ -25,6 +25,12 @@ Temperature min/avg/max = 57.5/57.8/58.0
       Clock min/avg/max = 600/1025/1400
 ```
 
+## Logging
+
+By default logging is turned off but it can changed by changing `IS_LOGGING_ENABLED` to `True` in [src/config.py](src/config.py).
+Default log path is set to `/var/log/rpidiag.log` which means that `sudo` is needed to actually save the log file.
+This location was chosen because in order to extend the life of an SD Card it is advised to do extensive logging with a tool like [log2ram](https://github.com/azlux/log2ram) which mounts `/var/log` directly in RAM.
+
 ## How to read throttled message?
 Note that trailing zeros are removed from the output
 
@@ -55,5 +61,4 @@ python3 rpi-diagnoser/main.py
 ## TODO
 - calculate and show standard deviation
 - update throttled output
-- log to /var/log (for usage with [log2ram](https://github.com/azlux/log2ram))
 - add CLI interface

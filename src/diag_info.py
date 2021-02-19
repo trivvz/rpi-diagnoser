@@ -43,7 +43,7 @@ class DiagInfo:
             file.write(self._format_log_output() + "\n")
 
     def _format_log_output(self) -> str:
-        return "  ".join([val for val in self._get_output_dict().values()])
+        return ", ".join([val for val in self._get_output_dict().values()])
 
     def _get_output_dict(self) -> Dict[str, str]:
         clk_align = " " if self.clock.value < 1000 else ""
