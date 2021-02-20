@@ -61,7 +61,8 @@ It is advised to do it with a tool like [log2ram](https://github.com/azlux/log2r
 
 ```
 git clone https://github.com/trivvz/rpidiag.git
-python3 rpidiag/main.py
+cd rpidiag/
+python3 rpidiag
 ```
 
 ## TODO
@@ -69,3 +70,4 @@ python3 rpidiag/main.py
 - calculate and show standard deviation
 - update throttled output
 - add CLI interface
+- add setup.py
