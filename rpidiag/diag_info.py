@@ -47,11 +47,13 @@ class DiagInfo:
         return ", ".join([val for val in self._get_output_dict(FULL_DATETIME).values()])
 
     def _get_output_dict(self, time_format: str = HOUR_MIN_SEC) -> Dict[str, str]:
-        clk_align = " " if self.clock.value < 1000 else ""
         return {
             "time": utils.get_formatted_datetime(self.time, time_format),
             "temperature": f"{self.temperature.value}{DEGREE_SIGN}C",
             "voltage": f"{self.voltage.value:.2f}V",
-            "clock": f"{clk_align}{self.clock.value} MHz",
+            "clock": f"{self._handle_clock_align()}{self.clock.value} MHz",
             "throttled": self.throttled.get(),
         }
+
+    def _handle_clock_align(self):
+        return " " if self.clock.value < 1000 else ""
