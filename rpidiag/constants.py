@@ -18,3 +18,6 @@ THROTTLED_BIT_16 = 6  # end of first section
 THROTTLED_BIT_3 = -4  # beginning of second section
 
 DEGREE_SIGN = "\N{DEGREE SIGN}"
+
+HOUR_MIN_SEC = "%H:%M:%S"
+FULL_DATETIME = f"%Y-%m-%d {HOUR_MIN_SEC}"

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Dict
 
 from rpidiag import throttled, utils, value
-from rpidiag.constants import DEGREE_SIGN
+from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
 from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
 
 
@@ -44,12 +44,12 @@ class DiagInfo:
             file.write(self._format_log_output() + "\n")
 
     def _format_log_output(self) -> str:
-        return ", ".join([val for val in self._get_output_dict().values()])
+        return ", ".join([val for val in self._get_output_dict(FULL_DATETIME).values()])
 
-    def _get_output_dict(self) -> Dict[str, str]:
+    def _get_output_dict(self, time_format: str = HOUR_MIN_SEC) -> Dict[str, str]:
         clk_align = " " if self.clock.value < 1000 else ""
         return {
-            "time": utils.format_time(self.time),
+            "time": utils.get_formatted_datetime(self.time, time_format),
             "temperature": f"{self.temperature.value}{DEGREE_SIGN}C",
             "voltage": f"{self.voltage.value:.2f}V",
             "clock": f"{clk_align}{self.clock.value} MHz",
