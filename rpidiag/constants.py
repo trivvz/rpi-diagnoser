@@ -11,11 +11,17 @@ MEASURE_TEMP_SPLIT = "'"
 MEASURE_VOLTS_SPLIT = "V"
 THROTTLED_SEP = ":"
 
-# Throttled is 20-bit little-endian
-# Reference: https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md
-THROTTLED_BIT_19 = 2  # beginning of first section
-THROTTLED_BIT_16 = 6  # end of first section
-THROTTLED_BIT_3 = -4  # beginning of second section
+# Throttled is a 20-bit little-endian
+# Reference:
+# https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md
+#
+# Output string looks like this and we need the indices of 3 bits
+# (counting starts from 0):
+#  '0b111100000000001111'
+# 19th^  ^16th      ^3rd
+THROTTLED_BIT_19 = 2
+THROTTLED_BIT_16 = THROTTLED_BIT_19 + 3
+THROTTLED_BIT_3 = -4
 
 DEGREE_SIGN = "\N{DEGREE SIGN}"
 
