@@ -1,5 +1,5 @@
-from src import utils
-from src.constants import (
+from rpidiag import utils
+from rpidiag.constants import (
     GET_THROTTLED,
     THROTTLED_BIT_19,
     THROTTLED_BIT_16,

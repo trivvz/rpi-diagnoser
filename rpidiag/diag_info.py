@@ -1,9 +1,9 @@
 from datetime import datetime
 from typing import Dict
 
-from src import throttled, utils, value
-from src.constants import DEGREE_SIGN
-from src.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
+from rpidiag import throttled, utils, value
+from rpidiag.constants import DEGREE_SIGN
+from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
 
 
 class DiagInfo:

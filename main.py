@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 import time
 
-from src import diag_info
-from src.config import IS_LOGGING_ENABLED, REFRESH_TIME, LOGFILE
-from src.templates import HEADER
+from rpidiag import diag_info
+from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME, LOGFILE
+from rpidiag.templates import HEADER
 
 
 if __name__ == "__main__":

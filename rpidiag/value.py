@@ -1,7 +1,7 @@
 from typing import Callable, Dict
 
-from src import utils
-from src.constants import (
+from rpidiag import utils
+from rpidiag.constants import (
     MEASURE_CLOCK,
     CLOCK_DIVISOR,
     MEASURE_TEMP,
@@ -9,7 +9,7 @@ from src.constants import (
     MEASURE_VOLTS,
     MEASURE_VOLTS_SPLIT,
 )
-from src.my_types import TypeClock, TypeTemperature, TypeVoltage, AnyValue
+from rpidiag.my_types import TypeClock, TypeTemperature, TypeVoltage, AnyValue
 
 
 class Value:
