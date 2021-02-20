@@ -1,6 +1,5 @@
 from string import Template
 
-DEGREE_SIGN = "\N{DEGREE SIGN}"
 
 VER_FRAME = "\u2502"  # ─
 HOR_FRAME = "\u2500"  # │
@@ -17,31 +16,42 @@ VOLTS_WIDTH = 7
 CLOCK_WIDTH = 10
 THROTTLED_WIDTH = 11
 
-HEADER = (
-    f"{TL_CORNER}{HOR_FRAME*TIME_WIDTH}{TOP_T}"
-    f"{HOR_FRAME*TEMP_WIDTH}{TOP_T}"
-    f"{HOR_FRAME*VOLTS_WIDTH}{TOP_T}"
-    f"{HOR_FRAME*CLOCK_WIDTH}{TOP_T}"
-    f"{HOR_FRAME*THROTTLED_WIDTH}{TR_CORNER}\n"
+HEADER_TOP = (
+    f"{TL_CORNER}{HOR_FRAME * TIME_WIDTH}{TOP_T}"
+    f"{HOR_FRAME * TEMP_WIDTH}{TOP_T}"
+    f"{HOR_FRAME * VOLTS_WIDTH}{TOP_T}"
+    f"{HOR_FRAME * CLOCK_WIDTH}{TOP_T}"
+    f"{HOR_FRAME * THROTTLED_WIDTH}{TR_CORNER}\n"
+)
+
+HEADER_MID = (
     f"{VER_FRAME}   TIME   "
     f"{VER_FRAME}  TEMP  "
     f"{VER_FRAME} VOLTS "
     f"{VER_FRAME}  CLOCK   "
-    f"{VER_FRAME} THROTTLED {VER_FRAME}\n"
-    f"{LEFT_T}{HOR_FRAME*TIME_WIDTH}{CROSS}"
-    f"{HOR_FRAME*TEMP_WIDTH}{CROSS}"
-    f"{HOR_FRAME*VOLTS_WIDTH}{CROSS}"
-    f"{HOR_FRAME*CLOCK_WIDTH}{CROSS}"
-    f"{HOR_FRAME*THROTTLED_WIDTH}{RIGHT_T}"
+    f"{VER_FRAME} THROTTLED "
+    f"{VER_FRAME}\n"
 )
 
+HEADER_BTM = (
+    f"{LEFT_T}"
+    f"{HOR_FRAME * TIME_WIDTH}{CROSS}"
+    f"{HOR_FRAME * TEMP_WIDTH}{CROSS}"
+    f"{HOR_FRAME * VOLTS_WIDTH}{CROSS}"
+    f"{HOR_FRAME * CLOCK_WIDTH}{CROSS}"
+    f"{HOR_FRAME * THROTTLED_WIDTH}"
+    f"{RIGHT_T}"
+)
+
+HEADER = HEADER_TOP + HEADER_MID + HEADER_BTM
 
 OUTPUT_TEMPLATE = Template(
-    f"""
-{VER_FRAME} $time {VER_FRAME} $temperature {VER_FRAME} $voltage {VER_FRAME} $clock {VER_FRAME} $throttled {VER_FRAME}
-"""[
-        1:-1
-    ]
+    f"{VER_FRAME} $time "
+    f"{VER_FRAME} $temperature "
+    f"{VER_FRAME} $voltage "
+    f"{VER_FRAME} $clock "
+    f"{VER_FRAME} $throttled "
+    f"{VER_FRAME}"
 )
 
 

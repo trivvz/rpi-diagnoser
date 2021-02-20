@@ -16,3 +16,5 @@ THROTTLED_SEP = ":"
 THROTTLED_BIT_19 = 2  # beginning of first section
 THROTTLED_BIT_16 = 6  # end of first section
 THROTTLED_BIT_3 = -4  # beginning of second section
+
+DEGREE_SIGN = "\N{DEGREE SIGN}"

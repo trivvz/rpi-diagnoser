@@ -2,7 +2,8 @@ from datetime import datetime
 from typing import Dict
 
 from src import throttled, utils, value
-from src.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE, DEGREE_SIGN
+from src.constants import DEGREE_SIGN
+from src.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
 
 
 class DiagInfo:
