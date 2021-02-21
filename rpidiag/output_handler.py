@@ -6,6 +6,10 @@ from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
 from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
 
+class LogSavePermissionError(RuntimeError):
+    pass
+
+
 class OutputHandler:
     @classmethod
     def get_summary(
@@ -30,8 +34,16 @@ class OutputHandler:
             with open(LOGFILE, "a+") as file:
                 file.write(output + "\n")
         except PermissionError:
+            raise LogSavePermissionError
+
+    @staticmethod
+    def check_save_permissions() -> None:
+        try:
+            with open(LOGFILE, "a+"):
+                pass
+        except PermissionError:
             print(
                 f"Not allowed to save the log file to: {LOGFILE}."
-                "\nChange log path or use sudo."
+                "\nChange the log path or use sudo."
             )
             sys.exit()
