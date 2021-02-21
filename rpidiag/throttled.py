@@ -1,3 +1,5 @@
+from typing import Dict
+
 from rpidiag import utils
 from rpidiag.constants import (
     GET_THROTTLED,
@@ -10,12 +12,25 @@ from rpidiag.constants import (
 
 class Throttled:
     def get(self) -> str:
-        throttled_str = self._convert_to_binary()
+        throttled_str = self._get_binary()
         return (
             self._get_occurred_part(throttled_str)
             + f"{THROTTLED_SEP}"
             + self._get_active_part(throttled_str)
         )
+
+    def get_summary(self):
+        output = []
+        for key, val in self._get_occurred_dict().items():
+            if val:
+                output.append(key)
+        return output
+
+    def _get_occurred_dict(self) -> Dict[int, int]:
+        output = {}
+        for idx, val in enumerate(self._get_occurred_part(self._get_binary())):
+            output[idx] = int(val)
+        return output
 
     @staticmethod
     def _get_occurred_part(throttled_bin: str) -> str:
@@ -25,7 +40,7 @@ class Throttled:
     def _get_active_part(throttled_bin: str) -> str:
         return f"{throttled_bin[THROTTLED_BIT_3:]}"
 
-    def _convert_to_binary(self) -> str:
+    def _get_binary(self) -> str:
         return f"{self._get_raw_value():#020b}"
 
     @staticmethod
