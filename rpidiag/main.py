@@ -3,14 +3,13 @@ import time
 from rpidiag import diag_info
 from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME
 from rpidiag.output_handler import OutputHandler
-from rpidiag.templates import HEADER
 
 
 def cli():
     if IS_LOGGING_ENABLED:
         OutputHandler.check_save_permissions()
+    OutputHandler.print_header()
     diag = diag_info.DiagInfo()
-    print(HEADER)
     try:
         while True:
             diag.update()

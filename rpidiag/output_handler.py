@@ -3,7 +3,7 @@ from typing import Dict, List
 
 from rpidiag.config import LOGFILE
 from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
-from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
+from rpidiag.templates import HEADER, OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
 
 class LogSavePermissionError(RuntimeError):
@@ -47,3 +47,7 @@ class OutputHandler:
                 "\nChange the log path or use sudo."
             )
             sys.exit()
+
+    @staticmethod
+    def print_header() -> None:
+        print(HEADER)
