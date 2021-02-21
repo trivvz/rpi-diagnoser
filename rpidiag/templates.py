@@ -55,7 +55,7 @@ OUTPUT_TEMPLATE = Template(
 )
 
 
-SUMMARY_STR_TEMPLATE = Template(
+SUMMARY_TEMPLATE = Template(
     """
 --- Raspberry Pi diagnostic statistics ---
 Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}

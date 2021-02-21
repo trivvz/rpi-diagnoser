@@ -23,7 +23,8 @@ THROTTLED_BIT_19 = 2
 THROTTLED_BIT_16 = THROTTLED_BIT_19 + 3
 THROTTLED_BIT_3 = -4
 
-THROTTLED_OCCURRED_MAPPING = {
+OCCURRED_EVENTS = "\nOccurred events: "
+EVENTS_MAPPING = {
     0: "soft temperature limit",
     1: "throttling",
     2: "arm frequency capped",

@@ -2,26 +2,26 @@ import sys
 from typing import Dict, List
 
 from rpidiag.config import LOGFILE
-from rpidiag.constants import THROTTLED_OCCURRED_MAPPING
-from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
+from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
+from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
 
 class OutputHandler:
     @classmethod
-    def gen_summary(cls,
-        summary_dict: Dict[str, str], occurred_keys: List[int]
+    def get_summary(
+        cls, summary: Dict[str, str], occurred_keys: List[int]
     ) -> str:
-        events = [THROTTLED_OCCURRED_MAPPING[key] for key in occurred_keys]
-        return SUMMARY_STR_TEMPLATE.substitute(summary_dict) + cls._prepare_events(events)
+        events = [EVENTS_MAPPING[key] for key in occurred_keys]
+        return SUMMARY_TEMPLATE.substitute(summary) + cls._get_events(events)
 
     @staticmethod
-    def _prepare_events(events: List[str]) -> str:
+    def _get_events(events: List[str]) -> str:
         if events:
-            return "Occurred events: " + ", ".join(events)
+            return OCCURRED_EVENTS + ", ".join(events)
         return ""
 
     @staticmethod
-    def gen_output(output_dict: Dict[str, str]) -> str:
+    def get_output(output_dict: Dict[str, str]) -> str:
         return OUTPUT_TEMPLATE.substitute(output_dict)
 
     @staticmethod
