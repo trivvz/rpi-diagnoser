@@ -1,10 +1,20 @@
+import pytest
+
 from rpidiag.value import Value, Temperature
 
 
-def test_value_get_avg():
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ([10, 20], 15.0),
+        ([52.6, 53.9, 54.1], 53.533),
+        ([0.001, 0], 0.0),
+    ],
+)
+def test_value_get_avg(test_input, expected):
     value = Value(Temperature.get)  # any getter is fine
-    value.all = [10, 20]
-    assert value.get_avg() == 15
+    value.all = test_input
+    assert pytest.approx(value.get_avg(), abs=0.001) == expected
 
 
 def test_value_update_max(mocker):
