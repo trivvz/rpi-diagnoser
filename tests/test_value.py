@@ -1,6 +1,6 @@
 import pytest
 
-from rpidiag.value import Value, Temperature
+from rpidiag.value import Clock, Value, Temperature, Voltage
 
 
 @pytest.mark.parametrize(
@@ -42,3 +42,42 @@ def test_value_update(
 
     assert value.max == expected_max
     assert value._get_summary()["max"] == expected_max
+
+
+def test_temperature_get_summary(mocker):
+    mocker.patch(
+        "rpidiag.value.Value._get_summary",
+        return_value={"min": 5, "avg": 7.5, "max": 10},
+    )
+    temperature = Temperature()
+    assert temperature.get_summary() == {
+        "temp_min": "5.0",
+        "temp_avg": "7.5",
+        "temp_max": "10.0",
+    }
+
+
+def test_voltage_get_summary(mocker):
+    mocker.patch(
+        "rpidiag.value.Value._get_summary",
+        return_value={"min": 5, "avg": 7.5, "max": 10},
+    )
+    voltage = Voltage()
+    assert voltage.get_summary() == {
+        "voltage_min": "5.00",
+        "voltage_avg": "7.50",
+        "voltage_max": "10.00",
+    }
+
+
+def test_clock_get_summary(mocker):
+    mocker.patch(
+        "rpidiag.value.Value._get_summary",
+        return_value={"min": 5, "avg": 7.5, "max": 10},
+    )
+    clock = Clock()
+    assert clock.get_summary() == {
+        "clock_min": "5",
+        "clock_avg": "7",
+        "clock_max": "10",
+    }

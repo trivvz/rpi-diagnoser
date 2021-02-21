@@ -88,11 +88,8 @@ class Clock(Value):
         val = int(utils.call_cmd(MEASURE_CLOCK))
         return TypeClock(val // CLOCK_DIVISOR)
 
-    def get_avg(self) -> TypeClock:
-        return sum(self.all) // len(self.all)
-
     def get_summary(self) -> Dict[str, str]:
         summary_dict = {}
         for key, val in self._get_summary().items():
-            summary_dict[f"clock_{key}"] = str(val)
+            summary_dict[f"clock_{key}"] = str(int(val))
         return summary_dict
