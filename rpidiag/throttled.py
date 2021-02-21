@@ -19,14 +19,14 @@ class Throttled:
             + self._get_active_part(throttled_str)
         )
 
-    def get_summary(self):
+    def get_summary_list(self):
         output = []
-        for key, val in self._get_occurred_dict().items():
+        for key, val in self.get_summary().items():
             if val:
                 output.append(key)
         return output
 
-    def _get_occurred_dict(self) -> Dict[int, int]:
+    def get_summary(self) -> Dict[int, int]:
         output = {}
         for idx, val in enumerate(self._get_occurred_part(self._get_binary())):
             output[idx] = int(val)

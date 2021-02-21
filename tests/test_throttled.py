@@ -24,3 +24,13 @@ def test_get_raw_value(mocker):
     mocker.patch("rpidiag.utils.call_cmd", return_value="0x0")
     throttled = Throttled()
     assert throttled._get_raw_value() == 0
+
+
+def test_get_summary(mocker):
+    occurred_part = "1011"
+    mocker.patch(
+        "rpidiag.throttled.Throttled._get_occurred_part",
+        return_value=occurred_part,
+    )
+    throttled = Throttled()
+    assert throttled.get_summary() == {0: 1, 1: 0, 2: 1, 3: 1}
