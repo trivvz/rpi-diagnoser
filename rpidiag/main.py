@@ -1,7 +1,7 @@
 import time
 
 from rpidiag import diag_info
-from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME, LOGFILE
+from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME
 from rpidiag.templates import HEADER
 
 
@@ -11,12 +11,12 @@ def cli():
     try:
         while True:
             diag.update()
-            str(diag)
+            print(diag.get_output())
 
             if IS_LOGGING_ENABLED:
-                diag.gen_log(LOGFILE)
+                diag.log()
 
             time.sleep(REFRESH_TIME)
 
     except KeyboardInterrupt:
-        print(diag.gen_summary())
+        print(diag.get_summary())

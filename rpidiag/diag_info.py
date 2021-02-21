@@ -3,7 +3,7 @@ from typing import Dict
 
 from rpidiag import throttled, utils, value
 from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
-from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_STR_TEMPLATE
+from rpidiag.output_handler import OutputHandler
 
 
 class DiagInfo:
@@ -17,7 +17,7 @@ class DiagInfo:
         self.time = datetime.now()
 
     def __str__(self) -> str:
-        print(self.gen_output())
+        print(self.get_output())
         return super().__str__()
 
     def update(self) -> None:
@@ -26,8 +26,8 @@ class DiagInfo:
         self.voltage.update()
         self.clock.update()
 
-    def gen_summary(self) -> str:
-        return SUMMARY_STR_TEMPLATE.substitute(self._get_summary_dict())
+    def get_summary(self) -> str:
+        return OutputHandler.gen_summary(self._get_summary_dict())
 
     def _get_summary_dict(self) -> Dict[str, str]:
         return {
@@ -36,12 +36,11 @@ class DiagInfo:
             **self.clock.get_summary(),
         }
 
-    def gen_output(self) -> str:
-        return OUTPUT_TEMPLATE.substitute(self._get_output_dict())
+    def get_output(self) -> str:
+        return OutputHandler.gen_output(self._get_output_dict())
 
-    def gen_log(self, logfile: str) -> None:
-        with open(logfile, "a+") as file:
-            file.write(self._format_log_output() + "\n")
+    def log(self) -> None:
+        OutputHandler.save_log(self._format_log_output())
 
     def _format_log_output(self) -> str:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]
