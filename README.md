@@ -17,21 +17,21 @@
 ┌──────────┬────────┬───────┬──────────┬───────────┐
 │   TIME   │  TEMP  │ VOLTS │  CLOCK   │ THROTTLED │
 ├──────────┼────────┼───────┼──────────┼───────────┤
-│ 00:23:30 │ 58.0°C │ 1.34V │ 1400 MHz │ 1000:0000 │
-│ 00:23:32 │ 57.5°C │ 1.23V │  700 MHz │ 1000:0000 │
-│ 00:23:34 │ 57.5°C │ 1.20V │  600 MHz │ 1000:0000 │
+│ 00:23:30 │ 60.3°C │ 1.34V │ 1400 MHz │ 1000:1000 │
+│ 00:23:32 │ 59.5°C │ 1.23V │  700 MHz │ 1000:0000 │
+│ 00:23:34 │ 57.8°C │ 1.20V │  600 MHz │ 1000:0000 │
 ^C
 --- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = 57.5/57.7/58.0
+Temperature min/avg/max = 57.8/59.2/60.3
     Voltage min/avg/max = 1.20/1.26/1.34
       Clock min/avg/max = 600/900/1400
 
-Occurred events: soft temperature limit, under-voltage
+Occurred events: soft temperature limit
 ```
 
 ## Logging
 
-By default, logging is turned off, but it can be changed by changing `IS_LOGGING_ENABLED` to `True` in [src/config.py](src/config.py).
+By default, logging is turned off, but it can be changed by setting `IS_LOGGING_ENABLED` to `True` in [src/config.py](src/config.py).
 The default log path is set to `/var/log/rpidiag.log` meaning that `sudo` is needed to save the log file.
 Remember that extensive logging may shorten the life of an SD Card.
 It is advised to do it with a tool like [log2ram](https://github.com/azlux/log2ram) which mounts `/var/log` directly in RAM.
