@@ -17,7 +17,7 @@ THROTTLED_SEP = ":"
 #
 # Output string looks like this and we need the indices of 3 bits
 # (counting starts from 0):
-#  '0b111100000000001111'
+#  "0b111100000000001111"
 # 19th^  ^16th      ^3rd
 THROTTLED_BIT_19 = 2
 THROTTLED_BIT_16 = THROTTLED_BIT_19 + 3
