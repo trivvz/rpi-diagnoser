@@ -6,10 +6,12 @@ name = "pypi"
 [packages]
 
 [dev-packages]
-pytest = "*"
 black = "*"
 flake8 = "*"
+coverage = "*"
+pytest = "*"
 pytest-mock = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.7"

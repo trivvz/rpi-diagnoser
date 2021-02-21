@@ -1,3 +1,7 @@
-venv/
 .vscode/
+
+venv/
 *.pyc
+
+.coverage
+coverage.xml
