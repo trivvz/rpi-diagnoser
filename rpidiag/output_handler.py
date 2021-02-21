@@ -1,3 +1,4 @@
+import sys
 from typing import Dict
 
 from rpidiag.config import LOGFILE
@@ -15,5 +16,12 @@ class OutputHandler:
 
     @staticmethod
     def save_log(output: str) -> None:
-        with open(LOGFILE, "a+") as file:
-            file.write(output + "\n")
+        try:
+            with open(LOGFILE, "a+") as file:
+                file.write(output + "\n")
+        except PermissionError:
+            print(
+                f"Not allowed to save the log file to: {LOGFILE}."
+                "\nChange log path or use sudo."
+            )
+            sys.exit()
