@@ -25,6 +25,8 @@
 Temperature min/avg/max = 57.5/57.7/58.0
     Voltage min/avg/max = 1.20/1.26/1.34
       Clock min/avg/max = 600/900/1400
+
+Occurred events: soft temperature limit, under-voltage
 ```
 
 ## Logging
@@ -67,7 +69,5 @@ python3 rpidiag
 
 ## TODO
 
-- calculate and show standard deviation
-- update throttled output
-- add CLI interface
+- add CLI interface (quiet mode, turn on/off the log, print help, and stuff like throttled message tips)
 - add setup.py
