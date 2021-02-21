@@ -27,7 +27,9 @@ class DiagInfo:
         self.clock.update()
 
     def get_summary(self) -> str:
-        return OutputHandler.gen_summary(self._get_summary_dict())
+        return OutputHandler.gen_summary(
+            self._get_summary_dict(), self.throttled.get_summary_list()
+        )
 
     def _get_summary_dict(self) -> Dict[str, str]:
         return {
