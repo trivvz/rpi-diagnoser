@@ -28,20 +28,20 @@ def test_value_get_avg(test_input, expected):
         (10, 20, 5, 5, 20),
     ],
 )
-def test_value_update(
+def test_update(
     initial_min, initial_max, test_input, expected_min, expected_max, mocker
 ):
-    mocker.patch("rpidiag.value.Temperature.get", return_value=test_input)
-    value = Value(Temperature.get)
-    value.min = initial_min
-    value.max = initial_max
-    value.update()
+    mocker.patch("rpidiag.value.Clock.get", return_value=test_input)
+    clock = Clock()
+    clock.min = initial_min
+    clock.max = initial_max
+    clock.update()
 
-    assert value.min == expected_min
-    assert value._get_summary()["min"] == expected_min
+    assert clock.min == expected_min
+    assert clock.get_summary()["clock_min"] == str(expected_min)
 
-    assert value.max == expected_max
-    assert value._get_summary()["max"] == expected_max
+    assert clock.max == expected_max
+    assert clock.get_summary()["clock_max"] == str(expected_max)
 
 
 def test_temperature_get_summary(mocker):
