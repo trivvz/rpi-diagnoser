@@ -1,6 +1,22 @@
 import pytest
 
-from rpidiag.value import Clock, Value, Temperature, Voltage
+from rpidiag.value import Clock, Temperature, Value, Voltage
+from tests.utils import utils
+
+
+def test_temperature_get(mocker):
+    utils.mock_cmd_output("58.9'C", mocker)
+    assert pytest.approx(Temperature().get(), abs=0.001) == 58.9
+
+
+def test_voltage_get(mocker):
+    utils.mock_cmd_output("0.8438V", mocker)
+    assert pytest.approx(Voltage().get(), abs=0.0001) == 0.8438
+
+
+def test_clock_get(mocker):
+    utils.mock_cmd_output("600117184", mocker)
+    assert Clock().get() == 600
 
 
 @pytest.mark.parametrize(
