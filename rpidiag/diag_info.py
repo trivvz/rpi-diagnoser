@@ -16,10 +16,6 @@ class DiagInfo:
         self.throttled = throttled.Throttled()
         self.time = datetime.now()
 
-    def __str__(self) -> str:
-        print(self.get_output())
-        return super().__str__()
-
     def update(self) -> None:
         self.time = datetime.now()
         self.temperature.update()
