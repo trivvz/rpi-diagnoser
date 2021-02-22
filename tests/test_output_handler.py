@@ -26,26 +26,24 @@ def test_prepare_events():
 
 
 def test_save_log(mocker):
-    mocker.mock_open()
+    mocker.patch("builtins.open", mocker.mock_open())
     mocker.patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
     OutputHandler.save_log("")
 
 
 def test_save_log_except(mocker):
-    mocker.mock_open()
     mocker.patch("rpidiag.output_handler.LOGFILE", "/root/rpidiag.log")
     with pytest.raises(LogSavePermissionError):
         OutputHandler.save_log("")
 
 
 def test_check_save_permissions(mocker):
-    mocker.mock_open()
+    mocker.patch("builtins.open", mocker.mock_open())
     mocker.patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
     OutputHandler.check_save_permissions()
 
 
 def test_check_save_permissions_except(mocker):
-    mocker.mock_open()
     mocker.patch("rpidiag.output_handler.LOGFILE", "/root/rpidiag.log")
     with pytest.raises(SystemExit):
         OutputHandler.check_save_permissions()
