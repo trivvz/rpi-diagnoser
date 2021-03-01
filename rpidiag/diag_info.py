@@ -3,7 +3,7 @@ from typing import Dict
 
 from rpidiag import throttled, utils, value
 from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
-from rpidiag.output_handler import OutputHandler
+from rpidiag import output_handler as oh
 
 
 class DiagInfo:
@@ -23,7 +23,7 @@ class DiagInfo:
         self.clock.update()
 
     def get_summary(self) -> str:
-        return OutputHandler.get_summary(
+        return oh.get_summary(
             self._get_summary_dict(), self.throttled.get_summary_list()
         )
 
@@ -35,10 +35,10 @@ class DiagInfo:
         }
 
     def get_output(self) -> str:
-        return OutputHandler.get_output(self._get_output_dict())
+        return oh.get_output(self._get_output_dict())
 
     def log(self) -> None:
-        OutputHandler.save_log(self._format_log_output())
+        oh.save_log(self._format_log_output())
 
     def _format_log_output(self) -> str:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]

@@ -10,44 +10,40 @@ class LogSavePermissionError(RuntimeError):
     pass
 
 
-class OutputHandler:
-    @classmethod
-    def get_summary(
-        cls, summary: Dict[str, str], occurred_keys: List[int]
-    ) -> str:
-        events = [EVENTS_MAPPING[key] for key in occurred_keys]
-        return SUMMARY_TEMPLATE.substitute(summary) + cls._get_events(events)
+def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
+    events = [EVENTS_MAPPING[key] for key in occurred_keys]
+    return SUMMARY_TEMPLATE.substitute(summary) + _get_events(events)
 
-    @staticmethod
-    def _get_events(events: List[str]) -> str:
-        if events:
-            return OCCURRED_EVENTS + ", ".join(events)
-        return ""
 
-    @staticmethod
-    def get_output(output_dict: Dict[str, str]) -> str:
-        return OUTPUT_TEMPLATE.substitute(output_dict)
+def print_header() -> None:
+    print(HEADER)
 
-    @staticmethod
-    def save_log(output: str) -> None:
-        try:
-            with open(LOGFILE, "a+") as file:
-                file.write(output + "\n")
-        except PermissionError:
-            raise LogSavePermissionError
 
-    @staticmethod
-    def check_save_permissions() -> None:
-        try:
-            with open(LOGFILE, "a+"):
-                pass
-        except PermissionError:
-            print(
-                f"Not allowed to save the log file to: {LOGFILE}."
-                "\nChange the log path or use sudo."
-            )
-            sys.exit()
+def check_save_permissions() -> None:
+    try:
+        with open(LOGFILE, "a+"):
+            pass
+    except PermissionError:
+        print(
+            f"Not allowed to save the log file to: {LOGFILE}."
+            "\nChange the log path or use sudo."
+        )
+        sys.exit()
 
-    @staticmethod
-    def print_header() -> None:
-        print(HEADER)
+
+def save_log(output: str) -> None:
+    try:
+        with open(LOGFILE, "a+") as file:
+            file.write(output + "\n")
+    except PermissionError:
+        raise LogSavePermissionError
+
+
+def get_output(output_dict: Dict[str, str]) -> str:
+    return OUTPUT_TEMPLATE.substitute(output_dict)
+
+
+def _get_events(events: List[str]) -> str:
+    if events:
+        return OCCURRED_EVENTS + ", ".join(events)
+    return ""
