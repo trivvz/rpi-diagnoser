@@ -1,1 +1,0 @@
-CALL_CMD = "rpidiag.utils.call_cmd"

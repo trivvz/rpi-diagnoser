@@ -28,14 +28,14 @@ def test_clock_get(mocker):
     ],
 )
 def test_value_get_avg(mocker, test_input, expected):
-    mocker.patch("rpidiag.utils.call_cmd", return_value="58.9'C")
+    utils.mock_cmd_output("58.9'C", mocker)
     value = Value(Temperature.get_temperature)  # any getter is fine
     value.all = test_input
     assert pytest.approx(sum(value.all) / len(value.all), abs=0.001) == expected
 
 
 def test_temperature_get_summary(mocker):
-    mocker.patch("rpidiag.utils.call_cmd", return_value="58.9'C")
+    utils.mock_cmd_output("58.9'C", mocker)
     mocker.patch(
         "rpidiag.value.Value._get_summary",
         return_value={"min": 5, "avg": 7.5, "max": 10},
@@ -49,7 +49,7 @@ def test_temperature_get_summary(mocker):
 
 
 def test_voltage_get_summary(mocker):
-    mocker.patch("rpidiag.utils.call_cmd", return_value="0.8438V")
+    utils.mock_cmd_output("0.8438V", mocker)
     mocker.patch(
         "rpidiag.value.Value._get_summary",
         return_value={"min": 5, "avg": 7.5, "max": 10},
@@ -63,7 +63,7 @@ def test_voltage_get_summary(mocker):
 
 
 def test_clock_get_summary(mocker):
-    mocker.patch("rpidiag.utils.call_cmd", return_value="600117184")
+    utils.mock_cmd_output("600117184", mocker)
     mocker.patch(
         "rpidiag.value.Value._get_summary",
         return_value={"min": 5, "avg": 7.5, "max": 10},

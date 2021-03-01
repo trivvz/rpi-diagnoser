@@ -1,4 +1,4 @@
-from tests.utils.constants import CALL_CMD
+CALL_CMD = "rpidiag.utils.call_cmd"
 
 
 def mock_cmd_output(return_value, mocker):
