@@ -1,4 +1,7 @@
+from unittest import mock
+
 import pytest
+
 from rpidiag.constants import OCCURRED_EVENTS
 from rpidiag.output_handler import LogSavePermissionError, OutputHandler
 
@@ -31,8 +34,9 @@ def test_save_log(mocker):
     OutputHandler.save_log("")
 
 
-def test_save_log_except(mocker):
-    mocker.patch("rpidiag.output_handler.LOGFILE", "/root/rpidiag.log")
+@mock.patch("builtins.open")
+def test_save_log_except(mock_open):
+    mock_open.side_effect = PermissionError
     with pytest.raises(LogSavePermissionError):
         OutputHandler.save_log("")
 
@@ -43,7 +47,8 @@ def test_check_save_permissions(mocker):
     OutputHandler.check_save_permissions()
 
 
-def test_check_save_permissions_except(mocker):
-    mocker.patch("rpidiag.output_handler.LOGFILE", "/root/rpidiag.log")
+@mock.patch("builtins.open")
+def test_check_save_permissions_except(mock_open):
+    mock_open.side_effect = PermissionError
     with pytest.raises(SystemExit):
         OutputHandler.check_save_permissions()
