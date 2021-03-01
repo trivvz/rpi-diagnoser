@@ -1,4 +1,4 @@
-from unittest import mock
+from unittest.mock import patch
 
 import pytest
 
@@ -14,10 +14,9 @@ from rpidiag.output_handler import LogSavePermissionError, OutputHandler
         ([], ""),
     ],
 )
-def test_gen_summary(test_input, expected, mocker):
-    mocker.patch(
-        "rpidiag.templates.SUMMARY_TEMPLATE.substitute", return_value=""
-    )
+@patch("rpidiag.templates.SUMMARY_TEMPLATE.substitute", return_value="")
+def test_gen_summary(mock_substitute, test_input, expected):
+    # patch("rpidiag.templates.SUMMARY_TEMPLATE.substitute", return_value="")
     assert OutputHandler.get_summary({}, test_input) == expected
 
 
@@ -28,26 +27,26 @@ def test_prepare_events():
     assert test_output == expected
 
 
-def test_save_log(mocker):
-    mocker.patch("builtins.open", mocker.mock_open())
-    mocker.patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
+@patch("builtins.open")
+def test_save_log(mock_open):
+    patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
     OutputHandler.save_log("")
 
 
-@mock.patch("builtins.open")
+@patch("builtins.open")
 def test_save_log_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(LogSavePermissionError):
         OutputHandler.save_log("")
 
 
-def test_check_save_permissions(mocker):
-    mocker.patch("builtins.open", mocker.mock_open())
-    mocker.patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
+@patch("builtins.open")
+def test_check_save_permissions(mock_open):
+    patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
     OutputHandler.check_save_permissions()
 
 
-@mock.patch("builtins.open")
+@patch("builtins.open")
 def test_check_save_permissions_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(SystemExit):
