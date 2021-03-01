@@ -1,5 +1,5 @@
 from rpidiag.throttled import Throttled
-from tests.utils import utils
+from tests import utils
 
 
 def test_get(mocker):

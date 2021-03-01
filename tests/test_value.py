@@ -1,7 +1,7 @@
 import pytest
 
 from rpidiag.value import Clock, Temperature, Value, Voltage
-from tests.utils import utils
+from tests import utils
 
 
 def test_temperature_get(mocker):
