@@ -6,10 +6,6 @@ from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
 from rpidiag.templates import HEADER, OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
 
-class LogSavePermissionError(RuntimeError):
-    pass
-
-
 def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
     events = [EVENTS_MAPPING[key] for key in occurred_keys]
     return SUMMARY_TEMPLATE.substitute(summary) + _get_events(events)
@@ -32,11 +28,8 @@ def check_save_permissions() -> None:
 
 
 def save_log(output: str) -> None:
-    try:
-        with open(LOGFILE, "a+") as file:
-            file.write(output + "\n")
-    except PermissionError:
-        raise LogSavePermissionError
+    with open(LOGFILE, "a+") as file:
+        file.write(output + "\n")
 
 
 def get_output(output_dict: Dict[str, str]) -> str:

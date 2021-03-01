@@ -4,7 +4,6 @@ import pytest
 
 from rpidiag.constants import OCCURRED_EVENTS
 import rpidiag.output_handler as oh
-from rpidiag.output_handler import LogSavePermissionError
 
 
 @pytest.mark.parametrize(
@@ -36,7 +35,7 @@ def test_save_log(mock_open):
 @patch("builtins.open")
 def test_save_log_except(mock_open):
     mock_open.side_effect = PermissionError
-    with pytest.raises(LogSavePermissionError):
+    with pytest.raises(PermissionError):
         oh.save_log("")
 
 
