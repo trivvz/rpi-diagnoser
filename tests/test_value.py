@@ -30,34 +30,7 @@ def test_clock_get(mocker):
 def test_value_get_avg(test_input, expected):
     value = Value(Temperature.get)  # any getter is fine
     value.all = test_input
-    assert pytest.approx(value.get_avg(), abs=0.001) == expected
-
-
-@pytest.mark.parametrize(
-    "initial_min, initial_max, test_input, expected_min, expected_max",
-    [
-        (15, 15, 20, 15, 20),
-        (15, 15, 10, 10, 15),
-        (15, 15, 15, 15, 15),
-        (10, 20, 15, 10, 20),
-        (10, 20, 30, 10, 30),
-        (10, 20, 5, 5, 20),
-    ],
-)
-def test_update(
-    initial_min, initial_max, test_input, expected_min, expected_max, mocker
-):
-    mocker.patch("rpidiag.value.Clock.get", return_value=test_input)
-    clock = Clock()
-    clock.min = initial_min
-    clock.max = initial_max
-    clock.update()
-
-    assert clock.min == expected_min
-    assert clock.get_summary()["clock_min"] == str(expected_min)
-
-    assert clock.max == expected_max
-    assert clock.get_summary()["clock_max"] == str(expected_max)
+    assert pytest.approx(sum(value.all) / len(value.all), abs=0.001) == expected
 
 
 def test_temperature_get_summary(mocker):

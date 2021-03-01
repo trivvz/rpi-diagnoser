@@ -18,27 +18,18 @@ class Value:
     def __init__(self, getter: Callable[[], AnyValue]) -> None:
         self.getter = getter
         self.value = self.getter()
-        self.min = self.value
-        self.max = self.value
         self.all = [self.value]
 
     def update(self) -> None:
         self.value = self.getter()
-        if self.value > self.max:
-            self.max = self.value
-        if self.value < self.min:
-            self.min = self.value
         self.all.append(self.value)
 
     def _get_summary(self) -> Dict[str, AnyValue]:
         return {
-            "min": self.min,
-            "avg": self.get_avg(),
-            "max": self.max,
+            "min": min(self.all),
+            "avg": sum(self.all) / len(self.all),
+            "max": max(self.all),
         }
-
-    def get_avg(self) -> AnyValue:
-        return sum(self.all) / len(self.all)
 
 
 class Temperature(Value):
