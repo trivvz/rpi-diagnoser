@@ -36,10 +36,10 @@ class Temperature(Value):
     """Class for handling temperature."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
+        super().__init__(self.get_temperature)
 
     @staticmethod
-    def get() -> TypeTemperature:
+    def get_temperature() -> TypeTemperature:
         val = float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
         return TypeTemperature(val)
 
@@ -54,10 +54,10 @@ class Voltage(Value):
     """Class for handling voltage."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
+        super().__init__(self.get_voltage)
 
     @staticmethod
-    def get() -> TypeVoltage:
+    def get_voltage() -> TypeVoltage:
         val = float(utils.call_cmd(MEASURE_VOLTS).split(MEASURE_VOLTS_SPLIT)[0])
         return TypeVoltage(val)
 
@@ -72,10 +72,10 @@ class Clock(Value):
     """Class for handling clock speed."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
+        super().__init__(self.get_clock)
 
     @staticmethod
-    def get() -> TypeClock:
+    def get_clock() -> TypeClock:
         val = int(utils.call_cmd(MEASURE_CLOCK))
         return TypeClock(val // CLOCK_DIVISOR)
 
