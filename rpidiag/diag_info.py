@@ -13,7 +13,6 @@ class DiagInfo:
         self.temperature = value.Temperature()
         self.voltage = value.Voltage()
         self.clock = value.Clock()
-        self.throttled = throttled.Throttled()
         self.time = datetime.now()
 
     def update(self) -> None:
@@ -24,7 +23,7 @@ class DiagInfo:
 
     def get_summary(self) -> str:
         return oh.get_summary(
-            self._get_summary_dict(), self.throttled.get_summary_list()
+            self._get_summary_dict(), throttled.get_summary_list()
         )
 
     def _get_summary_dict(self) -> Dict[str, str]:
@@ -52,7 +51,7 @@ class DiagInfo:
             "temperature": f"{self.temperature.value}{DEGREE_SIGN}C",
             "voltage": f"{self.voltage.value:.2f}V",
             "clock": f"{self._handle_clock_align()}{self.clock.value} MHz",
-            "throttled": self.throttled.get(),
+            "throttled": throttled.get(),
         }
 
     def _handle_clock_align(self):
