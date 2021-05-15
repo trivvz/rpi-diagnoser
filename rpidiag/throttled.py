@@ -20,11 +20,7 @@ def get() -> str:
 
 
 def get_summary_list() -> List[int]:
-    output = []
-    for key, val in get_summary().items():
-        if val:
-            output.append(key)
-    return output
+    return [key for key, val in get_summary().items() if val]
 
 
 def get_summary() -> Dict[int, int]:
