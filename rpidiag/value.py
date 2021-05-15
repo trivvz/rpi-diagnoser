@@ -1,4 +1,4 @@
-from typing import Callable, Dict
+from typing import Callable, Dict, Any
 
 from rpidiag import utils
 from rpidiag.constants import (
@@ -9,13 +9,13 @@ from rpidiag.constants import (
     MEASURE_VOLTS,
     MEASURE_VOLTS_SPLIT,
 )
-from rpidiag.my_types import TypeClock, TypeTemperature, TypeVoltage, AnyValue
+from rpidiag.my_types import TypeClock, TypeTemperature, TypeVoltage
 
 
 class Value:
     """Base class for different measured values."""
 
-    def __init__(self, getter: Callable[[], AnyValue]) -> None:
+    def __init__(self, getter: Callable[[], Any]) -> None:
         self.getter = getter
         self.value = self.getter()
         self.all = [self.value]
@@ -24,7 +24,7 @@ class Value:
         self.value = self.getter()
         self.all.append(self.value)
 
-    def _get_summary(self) -> Dict[str, AnyValue]:
+    def _get_summary(self) -> Dict[str, Any]:
         return {
             "min": min(self.all),
             "avg": sum(self.all) / len(self.all),
