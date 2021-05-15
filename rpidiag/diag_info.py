@@ -22,9 +22,7 @@ class DiagInfo:
         self.clock.update()
 
     def get_summary(self) -> str:
-        return oh.get_summary(
-            self._get_summary_dict(), throttled.get_summary_list()
-        )
+        return oh.get_summary(self._get_summary_dict(), throttled.get_summary_list())
 
     def _get_summary_dict(self) -> Dict[str, str]:
         return {
@@ -43,9 +41,7 @@ class DiagInfo:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]
         return ", ".join(output)
 
-    def _get_output_dict(
-        self, time_format: str = HOUR_MIN_SEC
-    ) -> Dict[str, str]:
+    def _get_output_dict(self, time_format: str = HOUR_MIN_SEC) -> Dict[str, str]:
         return {
             "time": utils.get_formatted_datetime(self.time, time_format),
             "temperature": f"{self.temperature.value}{DEGREE_SIGN}C",
