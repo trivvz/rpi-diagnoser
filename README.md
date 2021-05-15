@@ -1,8 +1,10 @@
-# RPiDiag
+RPiDiag
+=======
 
 ### RPiDiag is a small Python script that can be used to check the current status of your Raspberry Pi.
 
-## Output includes:
+Output includes
+---------------
 
 - time
 - temperature
@@ -11,7 +13,8 @@
 - throttled status code in binary
 - summary printed after exiting with `^C` (similar to the `ping` command)
 
-## Example output:
+Example output
+--------------
 
 ```
 ┌──────────┬────────┬───────┬──────────┬───────────┐
@@ -29,14 +32,16 @@ Temperature min/avg/max = 57.8/59.2/60.3
 Occurred events: soft temperature limit
 ```
 
-## Logging
+Logging
+-------
 
 By default, logging is turned off, but it can be changed by setting `IS_LOGGING_ENABLED` to `True` in [src/config.py](src/config.py).
 The default log path is set to `/var/log/rpidiag.log` meaning that `sudo` is needed to save the log file.
 Remember that extensive logging may shorten the life of an SD Card.
 It is advised to do it with a tool like [log2ram](https://github.com/azlux/log2ram) which mounts `/var/log` directly in RAM.
 
-## How to read a throttled message?
+How to read a throttled message?
+-------------------------------
 
 *Note that trailing zeros are removed from the output.*
 
@@ -53,13 +58,15 @@ It is advised to do it with a tool like [log2ram](https://github.com/azlux/log2r
 ```
 *Adopted from this [comment](https://github.com/raspberrypi/firmware/commit/404dfef3b364b4533f70659eafdcefa3b68cd7ae#commitcomment-31620480).*
 
-## Compatibility
+Compatibility
+-------------
 
 - RPi 3B+
 - RPi 4B
 - but it should work for every Pi
 
-## How to run?
+How to run?
+-----------
 
 ```
 git clone https://github.com/trivvz/rpidiag.git
@@ -67,7 +74,8 @@ cd rpidiag/
 python3 rpidiag
 ```
 
-## TODO
+TODO
+----
 
 - add CLI interface (quiet mode, turn on/off the log, print help, and stuff like throttled message tips)
 - add setup.py
