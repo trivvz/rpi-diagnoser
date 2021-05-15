@@ -44,10 +44,7 @@ class Temperature(Value):
         return TypeTemperature(val)
 
     def get_summary(self) -> Dict[str, str]:
-        summary_dict = {}
-        for key, val in self._get_summary().items():
-            summary_dict[f"temp_{key}"] = f"{val:.1f}"
-        return summary_dict
+        return {f"temp_{k}": f"{v:.1f}" for k, v in self._get_summary().items()}
 
 
 class Voltage(Value):
@@ -62,10 +59,7 @@ class Voltage(Value):
         return TypeVoltage(val)
 
     def get_summary(self) -> Dict[str, str]:
-        summary_dict = {}
-        for key, val in self._get_summary().items():
-            summary_dict[f"voltage_{key}"] = f"{val:.2f}"
-        return summary_dict
+        return {f"voltage_{k}": f"{v:.2f}" for k, v in self._get_summary().items()}
 
 
 class Clock(Value):
@@ -80,7 +74,4 @@ class Clock(Value):
         return TypeClock(val // CLOCK_DIVISOR)
 
     def get_summary(self) -> Dict[str, str]:
-        summary_dict = {}
-        for key, val in self._get_summary().items():
-            summary_dict[f"clock_{key}"] = str(int(val))
-        return summary_dict
+        return {f"clock_{k}": str(int(v)) for k, v in self._get_summary().items()}
