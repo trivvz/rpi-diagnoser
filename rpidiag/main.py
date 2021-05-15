@@ -6,10 +6,13 @@ from rpidiag import output_handler as oh
 
 
 def cli() -> None:
+
     if IS_LOGGING_ENABLED:
         oh.check_save_permissions()
+
     oh.print_header()
     diag = diag_info.DiagInfo()
+
     try:
         while True:
             diag.update()
