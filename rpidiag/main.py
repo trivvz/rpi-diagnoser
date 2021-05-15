@@ -5,7 +5,7 @@ from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME
 from rpidiag import output_handler as oh
 
 
-def cli():
+def cli() -> None:
     if IS_LOGGING_ENABLED:
         oh.check_save_permissions()
     oh.print_header()

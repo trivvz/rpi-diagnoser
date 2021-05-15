@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from rpidiag import utils
 from rpidiag.constants import (
@@ -19,7 +19,7 @@ def get() -> str:
     )
 
 
-def get_summary_list():
+def get_summary_list() -> List[int]:
     output = []
     for key, val in get_summary().items():
         if val:

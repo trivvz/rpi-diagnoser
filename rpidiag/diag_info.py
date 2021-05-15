@@ -54,5 +54,5 @@ class DiagInfo:
             "throttled": throttled.get(),
         }
 
-    def _handle_clock_align(self):
+    def _handle_clock_align(self) -> str:
         return " " if self.clock.value < 1000 else ""
