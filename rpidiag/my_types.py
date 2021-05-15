@@ -1,5 +1,5 @@
 """User-defined types."""
-from typing import NewType, Union
+from typing import NewType
 
 TypeClock = NewType("Clock", int)
 TypeTemperature = NewType("Temperature", float)
