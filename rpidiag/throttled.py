@@ -24,10 +24,7 @@ def get_summary_list() -> List[int]:
 
 
 def get_summary() -> Dict[int, int]:
-    output = {}
-    for idx, val in enumerate(_get_occurred_part(_get_binary())):
-        output[idx] = int(val)
-    return output
+    return {idx: int(val) for idx, val in enumerate(_get_occurred_part(_get_binary()))}
 
 
 def _get_occurred_part(throttled_bin: str) -> str:
