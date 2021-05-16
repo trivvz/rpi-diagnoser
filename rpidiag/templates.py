@@ -27,15 +27,11 @@ HEADER_BTM = (
 
 HEADER = HEADER_TOP + HEADER_MID + HEADER_BTM
 
-OUTPUT_TEMPLATE = Template(
-    f"{VER_FRAME} $time "
-    f"{VER_FRAME} $temperature "
-    f"{VER_FRAME} $voltage "
-    f"{VER_FRAME} $clock "
-    f"{VER_FRAME} $throttled "
-    f"{VER_FRAME}"
-)
+outputs = ["time", "temperature", "voltage", "clock", "throttled"]
 
+OUTPUT_TEMPLATE = Template(
+    "".join([f"{VER_FRAME} ${var} " for var in outputs]) + VER_FRAME
+)
 
 SUMMARY_TEMPLATE = Template(
     """
