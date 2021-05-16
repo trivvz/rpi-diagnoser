@@ -3,8 +3,8 @@ import sys
 from typing import Dict, List
 from pathlib import Path
 
-from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
-from rpidiag.templates import HEADER, OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
+from rpidiag.constants import EVENTS_MAPPING, HEADER, OCCURRED_EVENTS
+from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
 
 def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:

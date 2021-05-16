@@ -10,23 +10,6 @@ CROSS = "\u253C"      # ┼
 TL_CORNER = "\u250C"  # ┌
 TR_CORNER = "\u2510"  # ┐
 
-HEADER_TEXT = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
-
-HEADER_TOP = (
-    TL_CORNER
-    + TOP_T.join([len(text) * HOR_FRAME for text in HEADER_TEXT])
-    + TR_CORNER
-    + "\n"
-)
-
-HEADER_MID = "".join([VER_FRAME + text for text in HEADER_TEXT]) + VER_FRAME + "\n"
-
-HEADER_BTM = (
-    LEFT_T + CROSS.join([len(text) * HOR_FRAME for text in HEADER_TEXT]) + RIGHT_T
-)
-
-HEADER = HEADER_TOP + HEADER_MID + HEADER_BTM
-
 outputs = ["time", "temperature", "voltage", "clock", "throttled"]
 
 OUTPUT_TEMPLATE = Template(
@@ -41,3 +24,21 @@ Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}
       Clock min/avg/max = ${clock_min}/${clock_avg}/${clock_max}
 """
 )
+
+
+def build_header() -> str:
+    text = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
+
+    top = (
+        TL_CORNER
+        + TOP_T.join([len(text) * HOR_FRAME for text in text])
+        + TR_CORNER
+        + "\n"
+    )
+
+    mid = "".join([VER_FRAME + text for text in text]) + VER_FRAME + "\n"
+
+    btm = LEFT_T + CROSS.join([len(text) * HOR_FRAME for text in text]) + RIGHT_T
+
+    return top + mid + btm
+

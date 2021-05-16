@@ -1,5 +1,7 @@
 """Script specific constants."""
 
+from rpidiag.templates import build_header
+
 # RPi diagnostic commands
 MEASURE_TEMP = "vcgencmd measure_temp"
 MEASURE_VOLTS = "vcgencmd measure_volts"
@@ -35,3 +37,5 @@ DEGREE_SIGN = "\N{DEGREE SIGN}"
 
 HOUR_MIN_SEC = "%H:%M:%S"
 FULL_DATETIME = f"%Y-%m-%d {HOUR_MIN_SEC}"
+
+HEADER = build_header()
