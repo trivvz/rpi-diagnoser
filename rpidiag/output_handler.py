@@ -3,8 +3,8 @@ import sys
 from typing import Dict, List
 from pathlib import Path
 
-from rpidiag.constants import EVENTS_MAPPING, HEADER, OCCURRED_EVENTS
-from rpidiag.templates import OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
+from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
+from rpidiag.templates import build_header, build_output, SUMMARY_TEMPLATE
 
 
 def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
@@ -13,7 +13,7 @@ def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
 
 
 def print_header() -> None:
-    print(HEADER)
+    print(build_header())
 
 
 def check_save_permissions(logfile: Path) -> None:
@@ -34,7 +34,7 @@ def save_log(output: str, logfile: Path) -> None:
 
 
 def get_output(output_dict: Dict[str, str]) -> str:
-    return OUTPUT_TEMPLATE.substitute(output_dict)
+    return build_output(output_dict)
 
 
 def _get_events(events: List[str]) -> str:

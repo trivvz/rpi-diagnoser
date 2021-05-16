@@ -1,4 +1,5 @@
 from string import Template
+from typing import Dict
 
 
 VER_FRAME = "\u2502"  # ─
@@ -10,11 +11,7 @@ CROSS = "\u253C"      # ┼
 TL_CORNER = "\u250C"  # ┌
 TR_CORNER = "\u2510"  # ┐
 
-outputs = ["time", "temperature", "voltage", "clock", "throttled"]
-
-OUTPUT_TEMPLATE = Template(
-    "".join([f"{VER_FRAME} ${var} " for var in outputs]) + VER_FRAME
-)
+OUTPUTS = ["time", "temperature", "voltage", "clock", "throttled"]
 
 SUMMARY_TEMPLATE = Template(
     """
@@ -42,3 +39,8 @@ def build_header() -> str:
 
     return top + mid + btm
 
+
+def build_output(output_dict: Dict[str, str]) -> str:
+    return Template(
+        "".join([f"{VER_FRAME} ${var} " for var in OUTPUTS]) + VER_FRAME
+    ).substitute(output_dict)
