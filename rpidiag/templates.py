@@ -11,8 +11,8 @@ TL_CORNER = "\u250C"  # ┌
 TR_CORNER = "\u2510"  # ┐
 
 TIME_WIDTH = 10
-TEMP_WIDTH = 8
-VOLTS_WIDTH = 7
+TEMP_WIDTH = 9
+VOLTS_WIDTH = 8
 CLOCK_WIDTH = 10
 THROTTLED_WIDTH = 11
 
@@ -26,8 +26,8 @@ HEADER_TOP = (
 
 HEADER_MID = (
     f"{VER_FRAME}   TIME   "
-    f"{VER_FRAME}  TEMP  "
-    f"{VER_FRAME} VOLTS "
+    f"{VER_FRAME}  TEMP   "
+    f"{VER_FRAME} VOLTS  "
     f"{VER_FRAME}  CLOCK   "
     f"{VER_FRAME} THROTTLED "
     f"{VER_FRAME}\n"

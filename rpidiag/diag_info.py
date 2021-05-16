@@ -40,13 +40,13 @@ class DiagInfo:
 
     def _format_log_output(self) -> str:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]
-        return ", ".join(output).replace(DEGREE_SIGN, " deg")
+        return ", ".join(output).replace(DEGREE_SIGN, "deg")
 
     def _get_output_dict(self, time_format: str = HOUR_MIN_SEC) -> Dict[str, str]:
         return {
             "time": utils.get_formatted_datetime(self.time, time_format),
-            "temperature": f"{self.temperature.value}{DEGREE_SIGN}C",
-            "voltage": f"{self.voltage.value:.2f}V",
+            "temperature": f"{self.temperature.value} {DEGREE_SIGN}C",
+            "voltage": f"{self.voltage.value:.2f} V",
             "clock": f"{self._handle_clock_align()}{self.clock.value} MHz",
             "throttled": throttled.get(),
         }
