@@ -1,17 +1,8 @@
 from string import Template
 from typing import Dict
 
+from rpidiag import constants as c
 
-VER_FRAME = "\u2502"  # ─
-HOR_FRAME = "\u2500"  # │
-TOP_T = "\u252C"      # ┬
-LEFT_T = "\u251C"     # ├
-RIGHT_T = "\u2524"    # ┤
-CROSS = "\u253C"      # ┼
-TL_CORNER = "\u250C"  # ┌
-TR_CORNER = "\u2510"  # ┐
-
-OUTPUTS = ["time", "temperature", "voltage", "clock", "throttled"]
 
 SUMMARY_TEMPLATE = Template(
     """
@@ -27,20 +18,20 @@ def build_header() -> str:
     text = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
 
     top = (
-        TL_CORNER
-        + TOP_T.join([len(text) * HOR_FRAME for text in text])
-        + TR_CORNER
+        c.TL_CORNER
+        + c.TOP_T.join([len(text) * c.HOR_FRM for text in text])
+        + c.TR_CORNER
         + "\n"
     )
 
-    mid = "".join([VER_FRAME + text for text in text]) + VER_FRAME + "\n"
+    mid = "".join([c.VER_FRM + text for text in text]) + c.VER_FRM + "\n"
 
-    btm = LEFT_T + CROSS.join([len(text) * HOR_FRAME for text in text]) + RIGHT_T
+    btm = c.LEFT_T + c.CROSS.join([len(text) * c.HOR_FRM for text in text]) + c.RIGHT_T
 
     return top + mid + btm
 
 
 def build_output(output_dict: Dict[str, str]) -> str:
     return Template(
-        "".join([f"{VER_FRAME} ${var} " for var in OUTPUTS]) + VER_FRAME
+        "".join([f"{c.VER_FRM} ${var} " for var in c.OUTPUTS]) + c.VER_FRM
     ).substitute(output_dict)
