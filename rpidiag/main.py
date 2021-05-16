@@ -16,6 +16,13 @@ def cli() -> None:
         const=LOGFILE,
         help=f"log output, defaults to {LOGFILE}",
     )
+    parser.add_argument(
+        "-r",
+        "--refresh",
+        type=int,
+        default=REFRESH_TIME,
+        help="set refresh time, defaults to 2000 ms",
+    )
     parser.add_argument("-q", "--quiet", action="store_true", help="quiet mode")
 
     args = parser.parse_args()
@@ -38,7 +45,7 @@ def cli() -> None:
             if args.log:
                 diag.log(args.log)
 
-            time.sleep(REFRESH_TIME)
+            time.sleep(args.refresh / 1000)
 
     except KeyboardInterrupt:
         if not args.quiet:
