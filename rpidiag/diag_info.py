@@ -40,7 +40,7 @@ class DiagInfo:
 
     def _format_log_output(self) -> str:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]
-        return ", ".join(output)
+        return ", ".join(output).replace(DEGREE_SIGN, " deg")
 
     def _get_output_dict(self, time_format: str = HOUR_MIN_SEC) -> Dict[str, str]:
         return {
