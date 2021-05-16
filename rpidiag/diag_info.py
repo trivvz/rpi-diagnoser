@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 from typing import Dict
 
 from rpidiag import throttled, utils, value
@@ -34,8 +35,8 @@ class DiagInfo:
     def get_output(self) -> str:
         return oh.get_output(self._get_output_dict())
 
-    def log(self) -> None:
-        oh.save_log(self._format_log_output())
+    def log(self, logfile: Path) -> None:
+        oh.save_log(self._format_log_output(), logfile)
 
     def _format_log_output(self) -> str:
         output = [val for val in self._get_output_dict(FULL_DATETIME).values()]

@@ -28,25 +28,23 @@ def test_prepare_events():
 
 @patch("builtins.open")
 def test_save_log(mock_open):
-    patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
-    oh.save_log("")
+    oh.save_log("", "./rpidiag.log")
 
 
 @patch("builtins.open")
 def test_save_log_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(PermissionError):
-        oh.save_log("")
+        oh.save_log("", "./rpidiag.log")
 
 
 @patch("builtins.open")
 def test_check_save_permissions(mock_open):
-    patch("rpidiag.output_handler.LOGFILE", "./rpidiag.log")
-    oh.check_save_permissions()
+    oh.check_save_permissions("./rpidiag.log")
 
 
 @patch("builtins.open")
 def test_check_save_permissions_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(SystemExit):
-        oh.check_save_permissions()
+        oh.check_save_permissions("./rpidiag.log")

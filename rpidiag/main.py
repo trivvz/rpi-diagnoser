@@ -2,19 +2,26 @@ import argparse
 import time
 
 from rpidiag import diag_info
-from rpidiag.config import IS_LOGGING_ENABLED, REFRESH_TIME
+from rpidiag.config import REFRESH_TIME, LOGFILE
 from rpidiag import output_handler as oh
 
 
 def cli() -> None:
     parser = argparse.ArgumentParser()
 
+    parser.add_argument(
+        "-l",
+        "--log",
+        nargs="?",
+        const=LOGFILE,
+        help=f"log output, defaults to {LOGFILE}",
+    )
     parser.add_argument("-q", "--quiet", action="store_true", help="quiet mode")
 
     args = parser.parse_args()
 
-    if IS_LOGGING_ENABLED:
-        oh.check_save_permissions()
+    if args.log:
+        oh.check_save_permissions(args.log)
 
     if not args.quiet:
         oh.print_header()
@@ -28,8 +35,8 @@ def cli() -> None:
             if not args.quiet:
                 print(diag.get_output())
 
-            if IS_LOGGING_ENABLED:
-                diag.log()
+            if args.log:
+                diag.log(args.log)
 
             time.sleep(REFRESH_TIME)
 

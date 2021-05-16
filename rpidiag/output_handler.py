@@ -1,7 +1,8 @@
 import sys
-from typing import Dict, List
 
-from rpidiag.config import LOGFILE
+from typing import Dict, List
+from pathlib import Path
+
 from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
 from rpidiag.templates import HEADER, OUTPUT_TEMPLATE, SUMMARY_TEMPLATE
 
@@ -15,20 +16,20 @@ def print_header() -> None:
     print(HEADER)
 
 
-def check_save_permissions() -> None:
+def check_save_permissions(logfile: Path) -> None:
     try:
-        with open(LOGFILE, "a+"):
+        with open(logfile, "a+"):
             pass
     except PermissionError:
         print(
-            f"Not allowed to save the log file to: {LOGFILE}."
+            f"Not allowed to save the log file to: {logfile}."
             "\nChange the log path or use sudo."
         )
         sys.exit()
 
 
-def save_log(output: str) -> None:
-    with open(LOGFILE, "a+") as file:
+def save_log(output: str, logfile: Path) -> None:
+    with open(logfile, "a+") as file:
         file.write(output + "\n")
 
 
