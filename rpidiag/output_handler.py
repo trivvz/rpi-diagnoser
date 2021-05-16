@@ -4,12 +4,12 @@ from typing import Dict, List
 from pathlib import Path
 
 from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
-from rpidiag.templates import build_header, build_output, SUMMARY_TEMPLATE
+from rpidiag.templates import build_header, build_output, build_summary
 
 
 def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
     events = [EVENTS_MAPPING[key] for key in occurred_keys]
-    return SUMMARY_TEMPLATE.substitute(summary) + _get_events(events)
+    return build_summary(summary) + _get_events(events)
 
 
 def print_header() -> None:

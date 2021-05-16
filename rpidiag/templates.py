@@ -4,16 +4,6 @@ from typing import Dict
 from rpidiag import constants as c
 
 
-SUMMARY_TEMPLATE = Template(
-    """
---- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}
-    Voltage min/avg/max = ${voltage_min}/${voltage_avg}/${voltage_max}
-      Clock min/avg/max = ${clock_min}/${clock_avg}/${clock_max}
-"""
-)
-
-
 def build_header() -> str:
     text = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
 
@@ -35,3 +25,14 @@ def build_output(output_dict: Dict[str, str]) -> str:
     return Template(
         "".join([f"{c.VER_FRM} ${var} " for var in c.OUTPUTS]) + c.VER_FRM
     ).substitute(output_dict)
+
+
+def build_summary(summary: Dict[str, str]) -> str:
+    return Template(
+        """
+--- Raspberry Pi diagnostic statistics ---
+Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}
+    Voltage min/avg/max = ${voltage_min}/${voltage_avg}/${voltage_max}
+    Clock min/avg/max = ${clock_min}/${clock_avg}/${clock_max}
+    """
+    ).substitute(summary)
