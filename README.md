@@ -77,5 +77,6 @@ python3 rpidiag
 TODO
 ----
 
-- add CLI interface (quiet mode, turn on/off the log, print help, and stuff like throttled message tips)
-- add setup.py
+- [x] add CLI interface (quiet mode, turn on/off the log, print help)
+- [ ] add setup.py
+- [ ] change package structure to include `src` folder
