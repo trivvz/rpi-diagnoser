@@ -1,6 +1,8 @@
 RPiDiag
 =======
 
+[![Tests](https://github.com/trivvz/rpidiag/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/trivvz/rpidiag/actions/workflows/tests.yml)
+
 ### RPiDiag is an app that can be used to check the current status of your Raspberry Pi.
 
 Output includes
