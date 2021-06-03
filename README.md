@@ -1,7 +1,7 @@
 RPiDiag
 =======
 
-### RPiDiag is a small Python script that can be used to check the current status of your Raspberry Pi.
+### RPiDiag is an app that can be used to check the current status of your Raspberry Pi.
 
 Output includes
 ---------------
@@ -41,7 +41,7 @@ Remember that extensive logging may shorten the life of an SD Card.
 It is advised to do it with a tool like [log2ram](https://github.com/azlux/log2ram) which mounts `/var/log` directly in RAM.
 
 How to read a throttled message?
--------------------------------
+--------------------------------
 
 *Note that trailing zeros are removed from the output.*
 
