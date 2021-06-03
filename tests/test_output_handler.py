@@ -14,7 +14,7 @@ import rpidiag.output_handler as oh
         ([], ""),
     ],
 )
-@patch("rpidiag.templates.SUMMARY_TEMPLATE.substitute", return_value="")
+@patch("rpidiag.output_handler.build_summary", return_value="")
 def test_gen_summary(mock_substitute, test_input, expected):
     assert oh.get_summary({}, test_input) == expected
 
