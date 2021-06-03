@@ -68,15 +68,33 @@ Compatibility
 How to run?
 -----------
 
+No external Python packages are needed to run the app at this point.
+Python 3.6 or later is needed.
+
 ```
 git clone https://github.com/trivvz/rpidiag.git
-cd rpidiag/
+cd rpidiag
 python3 rpidiag
+```
+
+### For development
+
+Dependencies are managed by
+[poetry](https://github.com/python-poetry/poetry).
+To build an environment with development dependencies run the
+following:
+
+```
+git clone https://github.com/trivvz/rpidiag.git
+cd rpidiag
+pip3 install -U poetry
+poetry install
 ```
 
 TODO
 ----
 
 - [x] add CLI interface (quiet mode, turn on/off the log, print help)
-- [ ] add setup.py
+- [x] add pyproject.toml
+- [ ] organize the repo into a Python package
 - [ ] change package structure to include `src` folder
