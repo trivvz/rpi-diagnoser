@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Set
 
 from rpidiag import utils
 from rpidiag.constants import (
@@ -7,6 +7,7 @@ from rpidiag.constants import (
     THROTTLED_BIT_16,
     THROTTLED_BIT_19,
     THROTTLED_SEP,
+    EVENTS_MAPPING,
 )
 
 
@@ -19,12 +20,12 @@ def get() -> str:
     )
 
 
-def get_summary_list() -> List[int]:
-    return [key for key, val in get_summary().items() if val]
-
-
-def get_summary() -> Dict[int, int]:
-    return {idx: int(val) for idx, val in enumerate(_get_occurred_part(_get_binary()))}
+def get_summary() -> Set[str]:
+    return {
+        EVENTS_MAPPING[idx]
+        for idx, val in enumerate(_get_occurred_part(_get_binary()))
+        if int(val)
+    }
 
 
 def _get_occurred_part(throttled_bin: str) -> str:

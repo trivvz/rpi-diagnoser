@@ -10,21 +10,14 @@ from rpidiag.constants import OCCURRED_EVENTS
 @pytest.mark.parametrize(
     "test_input, expected",
     [
-        ([0], OCCURRED_EVENTS + "soft temperature limit"),
-        ([1, 3], OCCURRED_EVENTS + "throttling, under-voltage"),
-        ([], ""),
+        ({"some_event"}, OCCURRED_EVENTS + "some_event"),
+        ({"z", "a", "b"}, OCCURRED_EVENTS + "a, b, z"),  # check sorting
+        ({}, ""),
     ],
 )
 @patch("rpidiag.output_handler.build_summary", return_value="")
 def test_gen_summary(mock_substitute, test_input, expected):
     assert oh.get_summary({}, test_input) == expected
-
-
-def test_prepare_events():
-    test_events = ["throttling", "under-voltage"]
-    test_output = oh._get_events(test_events)
-    expected = OCCURRED_EVENTS + "throttling, under-voltage"
-    assert test_output == expected
 
 
 @patch("builtins.open")

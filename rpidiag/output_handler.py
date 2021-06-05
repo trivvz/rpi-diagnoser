@@ -1,14 +1,13 @@
 import sys
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, Set
 
-from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
+from rpidiag.constants import OCCURRED_EVENTS
 from rpidiag.templates import build_summary
 
 
-def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:
-    events = [EVENTS_MAPPING[key] for key in occurred_keys]
-    return build_summary(summary) + _get_events(events)
+def get_summary(summary: Dict[str, str], occurred_events: Set[str]) -> str:
+    return build_summary(summary) + _get_events(occurred_events)
 
 
 def check_save_permissions(logfile: Path) -> None:
@@ -28,7 +27,7 @@ def save_log(output: str, logfile: Path) -> None:
         file.write(output + "\n")
 
 
-def _get_events(events: List[str]) -> str:
+def _get_events(events: Set[str]) -> str:
     if events:
-        return OCCURRED_EVENTS + ", ".join(events)
+        return OCCURRED_EVENTS + ", ".join(sorted(events))
     return ""
