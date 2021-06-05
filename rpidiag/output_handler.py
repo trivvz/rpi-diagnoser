@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from typing import Dict, Set
 
+from rpidiag.config import LOGFILE
 from rpidiag.constants import OCCURRED_EVENTS
 from rpidiag.templates import build_summary
 
@@ -12,12 +13,13 @@ def get_summary(summary: Dict[str, str], occurred_events: Set[str]) -> str:
 
 def check_save_permissions(logfile: Path) -> None:
     try:
+        if logfile.is_dir():
+            # If dir path is given, use default filename
+            logfile = Path(logfile, LOGFILE)
+
         with open(logfile, "a+"):
             pass
-    except IsADirectoryError:
-        logfile = Path(logfile, "rpidiag.log")
-        with open(logfile, "a+"):
-            pass
+
     except PermissionError:
         print(
             f"Not allowed to save the log file to: {logfile}."
@@ -28,7 +30,7 @@ def check_save_permissions(logfile: Path) -> None:
 
 def save_log(output: str, logfile: Path) -> None:
     if logfile.is_dir():
-        logfile = Path(logfile, "rpidiag.log")
+        logfile = Path(logfile, LOGFILE)
     with open(logfile, "a+") as file:
         file.write(output + "\n")
 

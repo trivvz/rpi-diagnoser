@@ -1,5 +1,5 @@
 from pathlib import Path
-from unittest.mock import patch, call
+from unittest.mock import patch
 
 import pytest
 
@@ -20,14 +20,12 @@ def test_gen_summary(mock_substitute, test_input, expected):
     assert oh.get_summary({}, test_input) == expected
 
 
-@patch("builtins.open")
-def test_save_log(mock_open):
-    oh.save_log("", Path("./rpidiag.log"))
-
-
-@patch("builtins.open")
-def test_save_log_dir(mock_open):
-    oh.save_log("", Path("."))
+@pytest.mark.parametrize("test_input", ["rpidiag.log", ""])
+def test_save_log(tmpdir, test_input):
+    try:
+        oh.save_log("", Path(tmpdir, test_input))
+    except Exception as ex:
+        assert False, f"test_save_log() raised {ex}"
 
 
 @patch("builtins.open")
@@ -37,22 +35,12 @@ def test_save_log_except(mock_open):
         oh.save_log("", Path("./rpidiag.log"))
 
 
-@patch("builtins.open")
-def test_check_save_permissions(mock_open):
-    oh.check_save_permissions(Path("./rpidiag.log"))
-
-
-@patch("builtins.open")
-def test_check_save_permissions_dir(mock_open):
-    mock_open.side_effect = IsADirectoryError
-
-    with pytest.raises(IsADirectoryError):
-        oh.check_save_permissions(Path("."))
-
-    assert mock_open.call_count == 2
-
-    calls = [call(Path("."), "a+"), call(Path(".", "rpidiag.log"), "a+")]
-    mock_open.assert_has_calls(calls)
+@pytest.mark.parametrize("test_input", ["rpidiag.log", ""])
+def test_check_save_permissions(tmpdir, test_input):
+    try:
+        oh.check_save_permissions(Path(tmpdir, test_input))
+    except Exception as ex:
+        assert False, f"test_check_save_permissions() raised {ex}"
 
 
 @patch("builtins.open")
