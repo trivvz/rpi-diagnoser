@@ -1,5 +1,4 @@
 import functools
-from string import Template
 from typing import Dict
 
 from rpidiag import constants as c
@@ -28,11 +27,9 @@ def build_output(output_dict: Dict[str, str]) -> str:
 
 
 def build_summary(summary: Dict[str, str]) -> str:
-    return Template(
-        """
+    return f"""
 --- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = ${temp_min}/${temp_avg}/${temp_max}
-    Voltage min/avg/max = ${voltage_min}/${voltage_avg}/${voltage_max}
-    Clock min/avg/max = ${clock_min}/${clock_avg}/${clock_max}
+Temperature min/avg/max = {summary["temp_min"]}/{summary["temp_avg"]}/{summary["temp_max"]}
+    Voltage min/avg/max = {summary["voltage_min"]}/{summary["voltage_avg"]}/{summary["voltage_max"]}
+    Clock min/avg/max = {summary["clock_min"]}/{summary["clock_avg"]}/{summary["clock_max"]}
     """
-    ).substitute(summary)
