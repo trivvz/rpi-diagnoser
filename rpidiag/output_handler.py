@@ -29,10 +29,6 @@ def save_log(output: str, logfile: Path) -> None:
         file.write(output + "\n")
 
 
-def get_output(output_dict: Dict[str, str]) -> str:
-    return build_output(output_dict)
-
-
 def _get_events(events: List[str]) -> str:
     if events:
         return OCCURRED_EVENTS + ", ".join(events)

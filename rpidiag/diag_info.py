@@ -5,6 +5,7 @@ from typing import Dict
 from rpidiag import throttled, utils, value
 from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
 from rpidiag import output_handler as oh
+from rpidiag import templates as t
 
 
 class DiagInfo:
@@ -33,7 +34,7 @@ class DiagInfo:
         }
 
     def get_output(self) -> str:
-        return oh.get_output(self._get_output_dict())
+        return t.build_output(self._get_output_dict())
 
     def log(self, logfile: Path) -> None:
         oh.save_log(self._format_log_output(), logfile)
