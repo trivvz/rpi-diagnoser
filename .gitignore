@@ -4,6 +4,7 @@
 venv/
 *.pyc
 
+.tox
 .coverage
 coverage.xml
 htmlcov/
