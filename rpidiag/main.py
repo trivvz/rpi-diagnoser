@@ -1,6 +1,7 @@
 import argparse
 import time
 from argparse import Namespace
+from pathlib import Path
 
 from rpidiag import diag_info
 from rpidiag import output_handler as oh
@@ -27,7 +28,7 @@ def cli() -> None:
                 print(diag.get_output())
 
             if args.log:
-                diag.log(args.log)
+                diag.log(Path(args.log))
 
             time.sleep(args.refresh / 1000)
 
