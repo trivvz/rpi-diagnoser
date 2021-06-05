@@ -1,9 +1,11 @@
+import functools
 from string import Template
 from typing import Dict
 
 from rpidiag import constants as c
 
 
+@functools.lru_cache(maxsize=1)
 def build_header() -> str:
     text = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
 
