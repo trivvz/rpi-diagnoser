@@ -1,3 +1,4 @@
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -28,23 +29,23 @@ def test_prepare_events():
 
 @patch("builtins.open")
 def test_save_log(mock_open):
-    oh.save_log("", "./rpidiag.log")
+    oh.save_log("", Path("./rpidiag.log"))
 
 
 @patch("builtins.open")
 def test_save_log_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(PermissionError):
-        oh.save_log("", "./rpidiag.log")
+        oh.save_log("", Path("./rpidiag.log"))
 
 
 @patch("builtins.open")
 def test_check_save_permissions(mock_open):
-    oh.check_save_permissions("./rpidiag.log")
+    oh.check_save_permissions(Path("./rpidiag.log"))
 
 
 @patch("builtins.open")
 def test_check_save_permissions_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(SystemExit):
-        oh.check_save_permissions("./rpidiag.log")
+        oh.check_save_permissions(Path("./rpidiag.log"))
