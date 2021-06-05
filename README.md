@@ -100,3 +100,5 @@ TODO
 - [x] add pyproject.toml
 - [ ] organize the repo into a Python package
 - [ ] change package structure to include `src` folder
+- [ ] add more flexible CLI interface, e.g. `-TC` to output only temp and clock values and similar
+
