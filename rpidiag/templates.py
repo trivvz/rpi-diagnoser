@@ -1,29 +1,14 @@
-import functools
 from typing import Dict
 
-from rpidiag import constants as c
-
-
-@functools.lru_cache(maxsize=1)
-def build_header() -> str:
-    text = ["   TIME   ", "  TEMP   ", " VOLTS  ", "  CLOCK   ", " THROTTLED "]
-
-    top = (
-        c.TL_CORNER
-        + c.TOP_T.join([len(text) * c.HOR_FRM for text in text])
-        + c.TR_CORNER
-        + "\n"
-    )
-
-    mid = "".join([c.VER_FRM + text for text in text]) + c.VER_FRM + "\n"
-
-    btm = c.LEFT_T + c.CROSS.join([len(text) * c.HOR_FRM for text in text]) + c.RIGHT_T
-
-    return top + mid + btm
+HEADER = """
+┌──────────┬─────────┬────────┬──────────┬───────────┐
+│   TIME   │  TEMP   │ VOLTS  │  CLOCK   │ THROTTLED │
+├──────────┼─────────┼────────┼──────────┼───────────┤
+    """.strip()
 
 
 def build_output(output_dict: Dict[str, str]) -> str:
-    return "".join([f"{c.VER_FRM} {val} " for val in output_dict.values()]) + c.VER_FRM
+    return "│" + "│".join([f" {val} " for val in output_dict.values()]) + "│"
 
 
 def build_summary(summary: Dict[str, str]) -> str:

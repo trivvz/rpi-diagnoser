@@ -5,7 +5,7 @@ from argparse import Namespace
 from rpidiag import diag_info
 from rpidiag import output_handler as oh
 from rpidiag.config import REFRESH_TIME, LOGFILE
-from rpidiag.templates import build_header
+from rpidiag.templates import HEADER
 
 
 def cli() -> None:
@@ -15,7 +15,7 @@ def cli() -> None:
         oh.check_save_permissions(args.log)
 
     if not args.quiet:
-        print(build_header())
+        print(HEADER)
 
     diag = diag_info.DiagInfo()
 

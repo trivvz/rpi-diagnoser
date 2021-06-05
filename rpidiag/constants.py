@@ -36,13 +36,5 @@ DEGREE_SIGN = "\N{DEGREE SIGN}"
 HOUR_MIN_SEC = "%H:%M:%S"
 FULL_DATETIME = f"%Y-%m-%d {HOUR_MIN_SEC}"
 
-VER_FRM = "\u2502"  # ─
-HOR_FRM = "\u2500"  # │
-TOP_T = "\u252C"  # ┬
-LEFT_T = "\u251C"  # ├
-RIGHT_T = "\u2524"  # ┤
-CROSS = "\u253C"  # ┼
-TL_CORNER = "\u250C"  # ┌
-TR_CORNER = "\u2510"  # ┐
 
 OUTPUTS = ["time", "temperature", "voltage", "clock", "throttled"]
