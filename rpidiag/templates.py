@@ -24,9 +24,7 @@ def build_header() -> str:
 
 
 def build_output(output_dict: Dict[str, str]) -> str:
-    return Template(
-        "".join([f"{c.VER_FRM} ${var} " for var in c.OUTPUTS]) + c.VER_FRM
-    ).substitute(output_dict)
+    return "".join([f"{c.VER_FRM} {val} " for val in output_dict.values()]) + c.VER_FRM
 
 
 def build_summary(summary: Dict[str, str]) -> str:
