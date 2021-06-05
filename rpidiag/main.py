@@ -4,7 +4,7 @@ from argparse import Namespace
 
 from rpidiag import diag_info
 from rpidiag import output_handler as oh
-from rpidiag.config import REFRESH_TIME, LOGFILE
+from rpidiag.config import REFRESH_TIME, LOGPATH
 from rpidiag.templates import HEADER
 
 
@@ -45,8 +45,8 @@ def _parse_cli() -> Namespace:
         "-l",
         "--log",
         nargs="?",
-        const=LOGFILE,
-        help=f"log output, defaults to {LOGFILE}",
+        const=LOGPATH,
+        help=f"log output, defaults to {LOGPATH}",
     )
     parser.add_argument(
         "-r",

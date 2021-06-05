@@ -1,5 +1,5 @@
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, call
 
 import pytest
 
@@ -26,6 +26,11 @@ def test_save_log(mock_open):
 
 
 @patch("builtins.open")
+def test_save_log_dir(mock_open):
+    oh.save_log("", Path("."))
+
+
+@patch("builtins.open")
 def test_save_log_except(mock_open):
     mock_open.side_effect = PermissionError
     with pytest.raises(PermissionError):
@@ -35,6 +40,19 @@ def test_save_log_except(mock_open):
 @patch("builtins.open")
 def test_check_save_permissions(mock_open):
     oh.check_save_permissions(Path("./rpidiag.log"))
+
+
+@patch("builtins.open")
+def test_check_save_permissions_dir(mock_open):
+    mock_open.side_effect = IsADirectoryError
+
+    with pytest.raises(IsADirectoryError):
+        oh.check_save_permissions(Path("."))
+
+    assert mock_open.call_count == 2
+
+    calls = [call(Path("."), "a+"), call(Path(".", "rpidiag.log"), "a+")]
+    mock_open.assert_has_calls(calls)
 
 
 @patch("builtins.open")

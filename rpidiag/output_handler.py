@@ -14,6 +14,10 @@ def check_save_permissions(logfile: Path) -> None:
     try:
         with open(logfile, "a+"):
             pass
+    except IsADirectoryError:
+        logfile = Path(logfile, "rpidiag.log")
+        with open(logfile, "a+"):
+            pass
     except PermissionError:
         print(
             f"Not allowed to save the log file to: {logfile}."
@@ -23,6 +27,8 @@ def check_save_permissions(logfile: Path) -> None:
 
 
 def save_log(output: str, logfile: Path) -> None:
+    if logfile.is_dir():
+        logfile = Path(logfile, "rpidiag.log")
     with open(logfile, "a+") as file:
         file.write(output + "\n")
 

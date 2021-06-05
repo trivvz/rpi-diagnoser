@@ -35,6 +35,3 @@ DEGREE_SIGN = "\N{DEGREE SIGN}"
 
 HOUR_MIN_SEC = "%H:%M:%S"
 FULL_DATETIME = f"%Y-%m-%d {HOUR_MIN_SEC}"
-
-
-OUTPUTS = ["time", "temperature", "voltage", "clock", "throttled"]
