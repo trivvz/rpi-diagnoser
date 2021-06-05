@@ -2,10 +2,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict
 
-from rpidiag import throttled, utils, value
-from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
 from rpidiag import output_handler as oh
 from rpidiag import templates as t
+from rpidiag import throttled, utils, value
+from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
 
 
 class DiagInfo:

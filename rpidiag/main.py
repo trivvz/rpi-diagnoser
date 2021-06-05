@@ -1,11 +1,10 @@
 import argparse
 import time
-
 from argparse import Namespace
 
 from rpidiag import diag_info
-from rpidiag.config import REFRESH_TIME, LOGFILE
 from rpidiag import output_handler as oh
+from rpidiag.config import REFRESH_TIME, LOGFILE
 from rpidiag.templates import build_header
 
 

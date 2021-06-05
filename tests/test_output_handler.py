@@ -3,8 +3,8 @@ from unittest.mock import patch
 
 import pytest
 
-from rpidiag.constants import OCCURRED_EVENTS
 import rpidiag.output_handler as oh
+from rpidiag.constants import OCCURRED_EVENTS
 
 
 @pytest.mark.parametrize(

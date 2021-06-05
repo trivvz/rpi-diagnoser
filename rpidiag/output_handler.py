@@ -1,10 +1,9 @@
 import sys
-
-from typing import Dict, List
 from pathlib import Path
+from typing import Dict, List
 
 from rpidiag.constants import EVENTS_MAPPING, OCCURRED_EVENTS
-from rpidiag.templates import build_output, build_summary
+from rpidiag.templates import build_summary
 
 
 def get_summary(summary: Dict[str, str], occurred_keys: List[int]) -> str:

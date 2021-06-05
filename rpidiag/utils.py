@@ -1,5 +1,5 @@
-from datetime import datetime
 import subprocess
+from datetime import datetime
 
 
 def call_cmd(cmd: str) -> str:
