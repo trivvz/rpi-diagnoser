@@ -101,4 +101,5 @@ TODO
 - [ ] organize the repo into a Python package
 - [ ] change package structure to include `src` folder
 - [ ] add more flexible CLI interface, e.g. `-TC` to output only temp and clock values and similar
+- [ ] move to [curses](https://docs.python.org/3/library/curses.html) and upgrade interface to something like `htop`
 
