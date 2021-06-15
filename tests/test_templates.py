@@ -27,9 +27,12 @@ def test_build_summary():
         "clock_avg": "17",
         "clock_max": "18",
     }
-    assert t.build_summary(summary) == """
+    assert (
+        t.build_summary(summary)
+        == """
 --- Raspberry Pi diagnostic statistics ---
 Temperature min/avg/max = 10/11/12
     Voltage min/avg/max = 13/14/15
     Clock min/avg/max = 16/17/18
     """
+    )

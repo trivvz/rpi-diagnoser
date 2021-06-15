@@ -2,12 +2,12 @@ from typing import Set
 
 from rpidiag import utils
 from rpidiag.constants import (
+    EVENTS_MAPPING,
     GET_THROTTLED,
     THROTTLED_BIT_3,
     THROTTLED_BIT_16,
     THROTTLED_BIT_19,
     THROTTLED_SEP,
-    EVENTS_MAPPING,
 )
 
 
