@@ -1,3 +1,2 @@
 #!/bin/sh
 poetry run pytest --cov=rpidiag --cov-report=xml
-

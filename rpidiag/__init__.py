@@ -1,4 +1,4 @@
-from sys import version_info, exit
+import sys
 
-if version_info < (3, 6, 0):
-    exit("Python 3.6 or later is required.")
+if sys.version_info < (3, 6, 0):
+    sys.exit("Python 3.6 or later is required.")

@@ -5,11 +5,11 @@ from pathlib import Path
 
 from rpidiag import diag_info
 from rpidiag import output_handler as oh
-from rpidiag.config import REFRESH_TIME, LOGPATH
+from rpidiag.config import LOGPATH, REFRESH_TIME
 from rpidiag.templates import HEADER
 
 
-def cli() -> None:
+def cli():
     args = _parse_cli()
 
     if args.log:

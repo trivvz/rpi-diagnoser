@@ -1,9 +1,9 @@
-from typing import Callable, Dict, Any
+from typing import Any, Callable, Dict
 
 from rpidiag import utils
 from rpidiag.constants import (
-    MEASURE_CLOCK,
     CLOCK_DIVISOR,
+    MEASURE_CLOCK,
     MEASURE_TEMP,
     MEASURE_TEMP_SPLIT,
     MEASURE_VOLTS,

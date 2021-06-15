@@ -1,6 +1,6 @@
 """User-defined types."""
 from typing import NewType
 
-TypeClock = NewType("Clock", int)
-TypeTemperature = NewType("Temperature", float)
-TypeVoltage = NewType("Voltage", float)
+TypeClock = NewType("TypeClock", int)
+TypeTemperature = NewType("TypeTemperature", float)
+TypeVoltage = NewType("TypeVoltage", float)
