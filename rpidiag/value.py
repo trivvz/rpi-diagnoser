@@ -16,11 +16,13 @@ class Value:
 
     def __init__(self, getter: Callable[[], Any]) -> None:
         self.getter = getter
-        self.value = self.getter()
         self.all = [self.value]
 
+    @property
+    def value(self):
+        return self.getter()
+
     def update(self) -> None:
-        self.value = self.getter()
         self.all.append(self.value)
 
     def _get_summary(self) -> Dict[str, Any]:
