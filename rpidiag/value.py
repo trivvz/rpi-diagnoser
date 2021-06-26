@@ -37,10 +37,7 @@ class Temperature(Value):
     """Class for handling temperature."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
-
-    def get(self) -> float:
-        return float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
+        super().__init__(get_temperature)
 
     def get_summary(self) -> Dict[str, str]:
         return {f"temp_{k}": f"{v:.1f}" for k, v in self._get_summary().items()}
@@ -50,10 +47,7 @@ class Voltage(Value):
     """Class for handling voltage."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
-
-    def get(self) -> float:
-        return float(utils.call_cmd(MEASURE_VOLTS).split(MEASURE_VOLTS_SPLIT)[0])
+        super().__init__(get_voltage)
 
     def get_summary(self) -> Dict[str, str]:
         return {f"voltage_{k}": f"{v:.2f}" for k, v in self._get_summary().items()}
@@ -63,10 +57,19 @@ class Clock(Value):
     """Class for handling clock speed."""
 
     def __init__(self) -> None:
-        super().__init__(self.get)
-
-    def get(self) -> int:
-        return int(utils.call_cmd(MEASURE_CLOCK)) // CLOCK_DIVISOR
+        super().__init__(get_clock)
 
     def get_summary(self) -> Dict[str, str]:
         return {f"clock_{k}": str(int(v)) for k, v in self._get_summary().items()}
+
+
+def get_temperature() -> float:
+    return float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
+
+
+def get_voltage() -> float:
+    return float(utils.call_cmd(MEASURE_VOLTS).split(MEASURE_VOLTS_SPLIT)[0])
+
+
+def get_clock() -> int:
+    return int(utils.call_cmd(MEASURE_CLOCK)) // CLOCK_DIVISOR
