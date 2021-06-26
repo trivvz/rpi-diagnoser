@@ -18,12 +18,8 @@ class Value:
         self.getter = getter
         self.all: List[Union[int, float]] = []
 
-    @property
-    def value(self) -> Union[int, float]:
-        return self.getter()
-
     def update(self) -> None:
-        self.all.append(self.value)
+        self.all.append(self.getter())
 
     def get_summary(self) -> Dict[str, Union[int, float]]:
         return {
