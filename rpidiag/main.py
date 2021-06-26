@@ -9,7 +9,7 @@ from rpidiag.config import LOGPATH, REFRESH_TIME
 from rpidiag.templates import HEADER
 
 
-def cli():
+def cli() -> int:
     args = _parse_cli()
 
     if args.log:
@@ -37,6 +37,8 @@ def cli():
             print(diag.get_summary())
         else:  # after ^C prompt should go to the next line
             print()
+
+    return 0
 
 
 def _parse_cli() -> Namespace:
