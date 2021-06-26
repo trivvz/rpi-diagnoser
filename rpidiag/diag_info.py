@@ -4,17 +4,18 @@ from typing import Dict, Union
 
 from rpidiag import output_handler as oh
 from rpidiag import templates as t
-from rpidiag import throttled, utils, value
+from rpidiag import throttled, utils
 from rpidiag.constants import DEGREE_SIGN, FULL_DATETIME, HOUR_MIN_SEC
+from rpidiag.value import Value, get_clock, get_temperature, get_voltage
 
 
 class DiagInfo:
     """Contains and processes the basic RPi diagnostic info."""
 
     def __init__(self) -> None:
-        self.temperature = value.Temperature()
-        self.voltage = value.Voltage()
-        self.clock = value.Clock()
+        self.temperature = Value(get_temperature)
+        self.voltage = Value(get_voltage)
+        self.clock = Value(get_clock)
         self.time = datetime.now()
 
     def update(self) -> None:
