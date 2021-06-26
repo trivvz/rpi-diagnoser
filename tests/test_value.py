@@ -1,14 +1,6 @@
 import pytest
 
-from rpidiag.value import (
-    Clock,
-    Temperature,
-    Value,
-    Voltage,
-    get_clock,
-    get_temperature,
-    get_voltage,
-)
+from rpidiag.value import Value, get_clock, get_temperature, get_voltage
 from tests import utils
 
 
@@ -37,48 +29,23 @@ def test_get_clock(mocker):
 )
 def test_value_get_avg(mocker, test_input, expected):
     utils.mock_cmd_output("58.9'C", mocker)
-    value = Value(get_temperature)  # any getter is fine
+    value = Value(getter_mock)  # any getter is fine
     value.all = test_input
     assert pytest.approx(sum(value.all) / len(value.all), abs=0.001) == expected
 
 
-def test_temperature_get_summary(mocker):
-    utils.mock_cmd_output("58.9'C", mocker)
+def test_get_summary(mocker):
     mocker.patch(
-        "rpidiag.value.Value._get_summary",
-        return_value={"min": 5, "avg": 7.5, "max": 10},
+        "rpidiag.value.Value.get_summary",
+        return_value={"min": 5.0, "avg": 7.5125, "max": 100},
     )
-    temperature = Temperature()
-    assert temperature.get_summary() == {
-        "temp_min": "5.0",
-        "temp_avg": "7.5",
-        "temp_max": "10.0",
+    value = Value(getter_mock)
+    assert value.get_summary() == {
+        "min": 5.0,
+        "avg": 7.5125,
+        "max": 100,
     }
 
 
-def test_voltage_get_summary(mocker):
-    utils.mock_cmd_output("0.8438V", mocker)
-    mocker.patch(
-        "rpidiag.value.Value._get_summary",
-        return_value={"min": 5, "avg": 7.5, "max": 10},
-    )
-    voltage = Voltage()
-    assert voltage.get_summary() == {
-        "voltage_min": "5.00",
-        "voltage_avg": "7.50",
-        "voltage_max": "10.00",
-    }
-
-
-def test_clock_get_summary(mocker):
-    utils.mock_cmd_output("600117184", mocker)
-    mocker.patch(
-        "rpidiag.value.Value._get_summary",
-        return_value={"min": 5, "avg": 7.5, "max": 10},
-    )
-    clock = Clock()
-    assert clock.get_summary() == {
-        "clock_min": "5",
-        "clock_avg": "7",
-        "clock_max": "10",
-    }
+def getter_mock():
+    return 0

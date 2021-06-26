@@ -25,7 +25,7 @@ class Value:
     def update(self) -> None:
         self.all.append(self.value)
 
-    def _get_summary(self) -> Dict[str, Any]:
+    def get_summary(self) -> Dict[str, Any]:
         return {
             "min": min(self.all),
             "avg": sum(self.all) / len(self.all),
@@ -39,9 +39,6 @@ class Temperature(Value):
     def __init__(self) -> None:
         super().__init__(get_temperature)
 
-    def get_summary(self) -> Dict[str, str]:
-        return {f"temp_{k}": f"{v:.1f}" for k, v in self._get_summary().items()}
-
 
 class Voltage(Value):
     """Class for handling voltage."""
@@ -49,18 +46,12 @@ class Voltage(Value):
     def __init__(self) -> None:
         super().__init__(get_voltage)
 
-    def get_summary(self) -> Dict[str, str]:
-        return {f"voltage_{k}": f"{v:.2f}" for k, v in self._get_summary().items()}
-
 
 class Clock(Value):
     """Class for handling clock speed."""
 
     def __init__(self) -> None:
         super().__init__(get_clock)
-
-    def get_summary(self) -> Dict[str, str]:
-        return {f"clock_{k}": str(int(v)) for k, v in self._get_summary().items()}
 
 
 def get_temperature() -> float:

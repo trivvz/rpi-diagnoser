@@ -17,22 +17,28 @@ def test_build_output():
 
 def test_build_summary():
     summary = {
-        "temp_min": "10",
-        "temp_avg": "11",
-        "temp_max": "12",
-        "voltage_min": "13",
-        "voltage_avg": "14",
-        "voltage_max": "15",
-        "clock_min": "16",
-        "clock_avg": "17",
-        "clock_max": "18",
+        "temp": {
+            "min": 49.99,
+            "avg": 52.123,
+            "max": 55,
+        },
+        "voltage": {
+            "min": 1.23,
+            "avg": 1.346,
+            "max": 1.405,
+        },
+        "clock": {
+            "min": 600,
+            "avg": 1000,
+            "max": 1400,
+        },
     }
     assert (
         t.build_summary(summary)
         == """
 --- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = 10/11/12
-    Voltage min/avg/max = 13/14/15
-    Clock min/avg/max = 16/17/18
+Temperature min/avg/max = 50.0/52.1/55.0
+    Voltage min/avg/max = 1.23/1.35/1.41
+    Clock min/avg/max = 600/1000/1400
     """
     )

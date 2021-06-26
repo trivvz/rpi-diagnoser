@@ -1,6 +1,6 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Union
 
 from rpidiag import output_handler as oh
 from rpidiag import templates as t
@@ -26,11 +26,11 @@ class DiagInfo:
     def get_summary(self) -> str:
         return oh.get_summary(self._get_summary_dict(), throttled.get_summary())
 
-    def _get_summary_dict(self) -> Dict[str, str]:
+    def _get_summary_dict(self) -> Dict[str, Dict[str, Union[int, float]]]:
         return {
-            **self.temperature.get_summary(),
-            **self.voltage.get_summary(),
-            **self.clock.get_summary(),
+            "temp": self.temperature.get_summary(),
+            "voltage": self.voltage.get_summary(),
+            "clock": self.clock.get_summary(),
         }
 
     def get_output(self) -> str:
