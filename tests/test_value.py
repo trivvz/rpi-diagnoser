@@ -6,17 +6,17 @@ from tests import utils
 
 def test_temperature_get(mocker):
     utils.mock_cmd_output("58.9'C", mocker)
-    assert pytest.approx(Temperature().get_temperature(), abs=0.001) == 58.9
+    assert pytest.approx(Temperature().get(), abs=0.001) == 58.9
 
 
 def test_voltage_get(mocker):
     utils.mock_cmd_output("0.8438V", mocker)
-    assert pytest.approx(Voltage().get_voltage(), abs=0.0001) == 0.8438
+    assert pytest.approx(Voltage().get(), abs=0.0001) == 0.8438
 
 
 def test_clock_get(mocker):
     utils.mock_cmd_output("600117184", mocker)
-    assert Clock().get_clock() == 600
+    assert Clock().get() == 600
 
 
 @pytest.mark.parametrize(
@@ -29,7 +29,7 @@ def test_clock_get(mocker):
 )
 def test_value_get_avg(mocker, test_input, expected):
     utils.mock_cmd_output("58.9'C", mocker)
-    value = Value(Temperature().get_temperature)  # any getter is fine
+    value = Value(Temperature().get)  # any getter is fine
     value.all = test_input
     assert pytest.approx(sum(value.all) / len(value.all), abs=0.001) == expected
 
