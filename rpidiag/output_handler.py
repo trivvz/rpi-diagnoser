@@ -8,7 +8,8 @@ from rpidiag.templates import build_summary
 
 
 def get_summary(
-    summary: Dict[str, Dict[str, Union[int, float]]], occurred_events: Set[str]
+    summary: Dict[str, Union[Dict[str, int], Dict[str, float]]],
+    occurred_events: Set[str],
 ) -> str:
     return build_summary(summary) + _get_events(occurred_events)
 

@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pytest
+from pytest_mock import MockFixture
 
 from rpidiag import utils
 from rpidiag.constants import FULL_DATETIME, HOUR_MIN_SEC
@@ -15,7 +16,7 @@ from rpidiag.constants import FULL_DATETIME, HOUR_MIN_SEC
         (b"temp=58.9'C\n", "58.9'C"),
     ],
 )
-def test_call_cmd(test_input, expected, mocker):
+def test_call_cmd(test_input: bytes, expected: str, mocker: MockFixture) -> None:
     mocker.patch("subprocess.check_output", return_value=test_input)
     assert utils.call_cmd("") == expected
 
@@ -24,7 +25,7 @@ def test_call_cmd(test_input, expected, mocker):
     "test_input, expected",
     [(HOUR_MIN_SEC, "21:37:33"), (FULL_DATETIME, "2012-12-21 21:37:33")],
 )
-def test_get_formatted_datetime(test_input: str, expected: str):
+def test_get_formatted_datetime(test_input: str, expected: str) -> None:
     test_datetime = datetime(2012, 12, 21, 21, 37, 33)
     output = utils.get_formatted_datetime(test_datetime, test_input)
     assert output == expected

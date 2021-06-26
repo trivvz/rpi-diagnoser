@@ -1,20 +1,23 @@
+from typing import List, Union
+
 import pytest
+from pytest_mock import MockFixture
 
 from rpidiag.value import Value, get_clock, get_temperature, get_voltage
 from tests import utils
 
 
-def test_get_temperature(mocker):
+def test_get_temperature(mocker: MockFixture) -> None:
     utils.mock_cmd_output("58.9'C", mocker)
     assert pytest.approx(get_temperature(), abs=0.001) == 58.9
 
 
-def test_get_voltage(mocker):
+def test_get_voltage(mocker: MockFixture) -> None:
     utils.mock_cmd_output("0.8438V", mocker)
     assert pytest.approx(get_voltage(), abs=0.0001) == 0.8438
 
 
-def test_get_clock(mocker):
+def test_get_clock(mocker: MockFixture) -> None:
     utils.mock_cmd_output("600117184", mocker)
     assert get_clock() == 600
 
@@ -27,14 +30,16 @@ def test_get_clock(mocker):
         ([0.001, 0], 0.0),
     ],
 )
-def test_value_get_avg(mocker, test_input, expected):
+def test_value_get_avg(
+    mocker: MockFixture, test_input: List[Union[int, float]], expected: float
+) -> None:
     utils.mock_cmd_output("58.9'C", mocker)
     value = Value(getter_mock)  # any getter is fine
     value.all = test_input
     assert pytest.approx(sum(value.all) / len(value.all), abs=0.001) == expected
 
 
-def test_get_summary(mocker):
+def test_get_summary(mocker: MockFixture) -> None:
     mocker.patch(
         "rpidiag.value.Value.get_summary",
         return_value={"min": 5.0, "avg": 7.5125, "max": 100},
@@ -47,5 +52,5 @@ def test_get_summary(mocker):
     }
 
 
-def getter_mock():
+def getter_mock() -> int:
     return 0

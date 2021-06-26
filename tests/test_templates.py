@@ -1,7 +1,7 @@
 from rpidiag import templates as t
 
 
-def test_build_output():
+def test_build_output() -> None:
     values = {
         "time": "12:34:56",
         "temperature": "49.4 °C",
@@ -15,12 +15,12 @@ def test_build_output():
     )
 
 
-def test_build_summary():
+def test_build_summary() -> None:
     summary = {
         "temp": {
             "min": 49.99,
             "avg": 52.123,
-            "max": 55,
+            "max": 55.01,
         },
         "voltage": {
             "min": 1.23,
@@ -33,8 +33,10 @@ def test_build_summary():
             "max": 1400,
         },
     }
+    # type is ignored because of mypy bug
+    # https://github.com/python/mypy/issues/7835
     assert (
-        t.build_summary(summary)
+        t.build_summary(summary)  # type: ignore
         == """
 --- Raspberry Pi diagnostic statistics ---
 Temperature min/avg/max = 50.0/52.1/55.0

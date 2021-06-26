@@ -19,13 +19,13 @@ class Value:
         self.all: List[Union[int, float]] = []
 
     @property
-    def value(self):
+    def value(self) -> Union[int, float]:
         return self.getter()
 
     def update(self) -> None:
         self.all.append(self.value)
 
-    def get_summary(self) -> Dict[str, Any]:
+    def get_summary(self) -> Dict[str, Union[int, float]]:
         return {
             "min": min(self.all),
             "avg": sum(self.all) / len(self.all),
