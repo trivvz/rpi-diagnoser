@@ -9,7 +9,7 @@ from rpidiag.config import LOGPATH, REFRESH_TIME
 from rpidiag.templates import HEADER
 
 
-def cli() -> int:
+def main() -> int:
     args = _parse_cli()
 
     if args.log:
