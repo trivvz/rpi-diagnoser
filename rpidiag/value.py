@@ -33,27 +33,6 @@ class Value:
         }
 
 
-class Temperature(Value):
-    """Class for handling temperature."""
-
-    def __init__(self) -> None:
-        super().__init__(get_temperature)
-
-
-class Voltage(Value):
-    """Class for handling voltage."""
-
-    def __init__(self) -> None:
-        super().__init__(get_voltage)
-
-
-class Clock(Value):
-    """Class for handling clock speed."""
-
-    def __init__(self) -> None:
-        super().__init__(get_clock)
-
-
 def get_temperature() -> float:
     return float(utils.call_cmd(MEASURE_TEMP).split(MEASURE_TEMP_SPLIT)[0])
 
