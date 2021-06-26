@@ -1,4 +1,4 @@
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, List, Union
 
 from rpidiag import utils
 from rpidiag.constants import (
@@ -16,7 +16,7 @@ class Value:
 
     def __init__(self, getter: Callable[[], Any]) -> None:
         self.getter = getter
-        self.all = [self.value]
+        self.all: List[Union[int, float]] = []
 
     @property
     def value(self):
