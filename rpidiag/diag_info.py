@@ -26,7 +26,7 @@ class DiagInfo:
     def get_summary(self) -> str:
         return oh.get_summary(self._get_summary_dict(), throttled.get_summary())
 
-    def _get_summary_dict(self) -> Dict[str, Dict[str, Union[int, float]]]:
+    def _get_summary_dict(self) -> Dict[str, Union[Dict[str, int], Dict[str, float]]]:
         return {
             "temp": self.temperature.get_summary(),
             "voltage": self.voltage.get_summary(),

@@ -11,7 +11,7 @@ def build_output(output_dict: Dict[str, str]) -> str:
     return "│" + "│".join([f" {val} " for val in output_dict.values()]) + "│"
 
 
-def build_summary(summary: Dict[str, Dict[str, Union[int, float]]]) -> str:
+def build_summary(summary: Dict[str, Union[Dict[str, int], Dict[str, float]]]) -> str:
     temp = summary["temp"]
     voltage = summary["voltage"]
     clock = summary["clock"]
