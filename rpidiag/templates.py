@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Union
 
 HEADER = """
 ┌──────────┬─────────┬────────┬──────────┬───────────┐
@@ -11,11 +11,14 @@ def build_output(output_dict: Dict[str, str]) -> str:
     return "│" + "│".join([f" {val} " for val in output_dict.values()]) + "│"
 
 
-def build_summary(summary: Dict[str, str]) -> str:
-    s = summary
+def build_summary(summary: Dict[str, Dict[str, Union[int, float]]]) -> str:
+    temp = summary["temp"]
+    voltage = summary["voltage"]
+    clock = summary["clock"]
+
     return f"""
 --- Raspberry Pi diagnostic statistics ---
-Temperature min/avg/max = {s["temp_min"]}/{s["temp_avg"]}/{s["temp_max"]}
-    Voltage min/avg/max = {s["voltage_min"]}/{s["voltage_avg"]}/{s["voltage_max"]}
-    Clock min/avg/max = {s["clock_min"]}/{s["clock_avg"]}/{s["clock_max"]}
+Temperature min/avg/max = {temp["min"]:.1f}/{temp["avg"]:.1f}/{temp["max"]:.1f}
+    Voltage min/avg/max = {voltage["min"]:.2f}/{voltage["avg"]:.2f}/{voltage["max"]:.2f}
+    Clock min/avg/max = {clock["min"]:.0f}/{clock["avg"]:.0f}/{clock["max"]:.0f}
     """

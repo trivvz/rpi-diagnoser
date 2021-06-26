@@ -1,13 +1,15 @@
 import sys
 from pathlib import Path
-from typing import Dict, Set
+from typing import Dict, Set, Union
 
 from rpidiag.config import LOGFILE
 from rpidiag.constants import OCCURRED_EVENTS
 from rpidiag.templates import build_summary
 
 
-def get_summary(summary: Dict[str, str], occurred_events: Set[str]) -> str:
+def get_summary(
+    summary: Dict[str, Dict[str, Union[int, float]]], occurred_events: Set[str]
+) -> str:
     return build_summary(summary) + _get_events(occurred_events)
 
 
