@@ -1,7 +1,7 @@
 from rpidiag import templates as t
 
 
-def test_build_output() -> None:
+def test_build_output():
     values = {
         "time": "12:34:56",
         "temperature": "49.4 °C",
@@ -15,7 +15,7 @@ def test_build_output() -> None:
     )
 
 
-def test_build_summary() -> None:
+def test_build_summary():
     summary = {
         "temp": {
             "min": 49.99,
