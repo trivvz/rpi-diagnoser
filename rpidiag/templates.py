@@ -21,4 +21,4 @@ def build_summary(summary: Dict[str, Union[Dict[str, int], Dict[str, float]]]) -
 Temperature min/avg/max = {temp["min"]:.1f}/{temp["avg"]:.1f}/{temp["max"]:.1f}
     Voltage min/avg/max = {voltage["min"]:.2f}/{voltage["avg"]:.2f}/{voltage["max"]:.2f}
     Clock min/avg/max = {clock["min"]:.0f}/{clock["avg"]:.0f}/{clock["max"]:.0f}
-    """
+"""
