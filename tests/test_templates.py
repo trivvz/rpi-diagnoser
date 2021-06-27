@@ -42,5 +42,5 @@ def test_build_summary():
 Temperature min/avg/max = 50.0/52.1/55.0
     Voltage min/avg/max = 1.23/1.35/1.41
     Clock min/avg/max = 600/1000/1400
-    """
+"""
     )
