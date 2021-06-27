@@ -2,6 +2,7 @@ import argparse
 import time
 from argparse import Namespace
 from pathlib import Path
+from typing import List, Optional
 
 from rpidiag import diag_info
 from rpidiag import output_handler as oh
@@ -9,8 +10,8 @@ from rpidiag.config import LOGPATH, REFRESH_TIME
 from rpidiag.templates import HEADER
 
 
-def main() -> int:
-    args = _parse_cli()
+def main(argv: Optional[List[str]] = None) -> int:
+    args = _parse_cli(argv)
 
     if args.log:
         oh.check_save_permissions(args.log)
@@ -41,7 +42,7 @@ def main() -> int:
     return 0
 
 
-def _parse_cli() -> Namespace:
+def _parse_cli(argv: Optional[List[str]]) -> Namespace:
     parser = argparse.ArgumentParser(prog="rpidiag")
 
     parser.add_argument(
@@ -60,4 +61,4 @@ def _parse_cli() -> Namespace:
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="quiet mode")
 
-    return parser.parse_args()
+    return parser.parse_args(argv)
