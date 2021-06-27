@@ -22,10 +22,8 @@ def test_gen_summary(mock_substitute, test_input, expected):
 
 @pytest.mark.parametrize("test_input", ["rpidiag.log", ""])
 def test_save_log(tmpdir, test_input):
-    try:
-        oh.save_log("", Path(tmpdir, test_input))
-    except Exception as ex:
-        assert False, f"test_save_log() raised {ex}"
+    # checks if no exception is raised
+    oh.save_log("", Path(tmpdir, test_input))
 
 
 @patch("builtins.open")
@@ -37,10 +35,8 @@ def test_save_log_except(mock_open):
 
 @pytest.mark.parametrize("test_input", ["rpidiag.log", ""])
 def test_check_save_permissions(tmpdir, test_input):
-    try:
-        oh.check_save_permissions(Path(tmpdir, test_input))
-    except Exception as ex:
-        assert False, f"test_check_save_permissions() raised {ex}"
+    # checks if no exception is raised
+    oh.check_save_permissions(Path(tmpdir, test_input))
 
 
 @patch("builtins.open")
