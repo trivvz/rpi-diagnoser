@@ -71,7 +71,7 @@ How to run?
 -----------
 
 No external Python packages are needed to run the app at this point.
-Python 3.6 or later is needed.
+Python 3.6.1 or later is needed.
 
 ```
 git clone https://github.com/trivvz/rpidiag.git
