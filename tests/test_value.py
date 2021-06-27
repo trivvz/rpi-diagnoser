@@ -46,3 +46,7 @@ def test_get_summary(mocker):
         "avg": 7.5125,
         "max": 100,
     }
+
+
+def test_getter_mock():
+    assert getter_mock() == 0
